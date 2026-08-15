@@ -14,3 +14,6 @@ You need to symlink the repo to ```~/.config/quickshell``` to be able to access 
 ```sh
 ln -s quickshell-island/ ~/.config/quickshell
 ```
+## Things to add
+- Dynamic theme switching (backend)
+- Dynamic theme switching (frontend)
