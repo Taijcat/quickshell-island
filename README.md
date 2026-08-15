@@ -8,5 +8,5 @@ qs ipc call controlCenter toggle
 
 You need to symlink the repo to ```~/.config/quickshell``` to be able to access the updates.
 ```sh
-ln -s quickshell-island ~/.config/quickshell
+ln -s quickshell-island/ ~/.config/quickshell
 ```
