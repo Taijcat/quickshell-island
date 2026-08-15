@@ -1,0 +1,4 @@
+# Style/qmldir
+module Style
+singleton Colors 1.0 Colors.qml
+singleton Metrics 1.0 Metrics.qml
