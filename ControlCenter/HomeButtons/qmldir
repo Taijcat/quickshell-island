@@ -1,3 +1,3 @@
 # ControlCenter/HomeButtons/qmldir
 module ControlCenter.HomeButtons
-Test 1.0 Test.qml
+Button 1.0 Button.qml

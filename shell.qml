@@ -20,7 +20,7 @@ ShellRoot {
       readonly property real roundingRadius: 11.5 // Half the height of the island when only the clock is active
       readonly property int islandPadding: 6
 
-      // Make the bitch work with multiple screens
+      // Make quickshell work with multiple screens
       required property var modelData
       screen: modelData
       WlrLayershell.namespace: "quickshell:island" // Hyprland bullshit
@@ -38,7 +38,6 @@ ShellRoot {
       ? Metrics.clockReservedHeight
       : 0
 
-      // Anchoring shit (duh)
       anchors.top: true
       anchors.left: true
       anchors.right: true

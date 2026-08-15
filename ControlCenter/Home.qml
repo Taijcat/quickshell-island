@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import "../Style"
 import "HomeButtons"
 
+
 Item {
   id: root
   property bool showHome: false
@@ -22,14 +23,16 @@ ColumnLayout {
   spacing: Metrics.spacingInMenu
   RowLayout {
   spacing: Metrics.spacingInMenu
-    Test {}
-    Test {}
+  Button {}
+  Button {}
+  Button {}
   }
   RowLayout {
   spacing: Metrics.spacingInMenu
-    Test {}
-    Test {}
-    Test {}
+
+  Button {}
+  Button {}
+  Button {}
   }
 }
 
