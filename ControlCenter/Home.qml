@@ -23,16 +23,16 @@ ColumnLayout {
   spacing: Metrics.spacingInMenu
   RowLayout {
   spacing: Metrics.spacingInMenu
-  Button {}
+  Ethernet {}
   Button {}
   Button {}
   }
   RowLayout {
   spacing: Metrics.spacingInMenu
+  Button {}
+  Button {}
+  Button {}
 
-  Button {}
-  Button {}
-  Button {}
   }
 }
 

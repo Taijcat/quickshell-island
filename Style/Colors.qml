@@ -34,7 +34,7 @@ QtObject {
     readonly property color accentText: palette.bg0_h
 
     // Semantic status colors — map to whatever hue each theme uses for that meaning
-    readonly property color err:     palette.redBright
+    readonly property color error:     palette.redBright
     readonly property color success: palette.greenBright
     readonly property color warn:    palette.yellowBright
     readonly property color info:    palette.blueBright
