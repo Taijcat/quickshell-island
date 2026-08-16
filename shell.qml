@@ -4,7 +4,7 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import "ControlCenter"
-import "Style"
+import "Config"
 
 ShellRoot {
   Variants{

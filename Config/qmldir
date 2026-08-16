@@ -1,4 +1,4 @@
-# Style/qmldir
-module Style
+# Config/qmldir
+module Config
 singleton Colors 1.0 Colors.qml
 singleton Metrics 1.0 Metrics.qml

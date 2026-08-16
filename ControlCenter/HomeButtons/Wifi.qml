@@ -3,7 +3,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Networking
-import "../../Style"
+import "../../Config/"
 
 // Boilerplate code for a button. For use in debugging and writing actually good buttons.
 Rectangle {

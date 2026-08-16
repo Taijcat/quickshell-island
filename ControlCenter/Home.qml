@@ -3,7 +3,7 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "../Style"
+import "../Config/"
 import "HomeButtons"
 
 
