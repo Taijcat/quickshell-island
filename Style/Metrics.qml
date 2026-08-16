@@ -17,5 +17,8 @@ QtObject {
   readonly property string iconFont: "JetBrainsMono Nerd Font Propo"
   readonly property int iconSize: 25
   readonly property int textSize: 15
+
+  // Config
+  readonly property string terminal: "kitty"
   
 }

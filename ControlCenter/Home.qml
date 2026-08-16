@@ -27,7 +27,7 @@ ColumnLayout {
   RowLayout {
   spacing: Metrics.spacingInMenu
   Ethernet {}
-  Button {}
+  Wifi {}
   Button {}
   }
   RowLayout {

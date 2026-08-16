@@ -14,15 +14,10 @@ Rectangle {
   color: buttonColor
   border.color: borderColor
 
-  // Network stuff
-  readonly property var wiredDevice: Networking.devices.values.find(d => d.type === DeviceType.Wired)
-  readonly property bool wiredActive: wiredDevice.connected
-  readonly property var wiredState: parseInt(wiredDevice.state.toString())
-
-  // Button stuff
+  // Color stuff
   property string buttonColor: {
       switch (wiredState) {
-        case 0: return mouseArea.containsMouse ? Colors.error : Colors.surface // Unknown (Not plugged in).
+        case 0: return mouseArea.containsMouse ? Colors.error : Colors.surface // Unknown (Not plugged in)
         case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
         case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
         case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
@@ -32,7 +27,7 @@ Rectangle {
 
   property string borderColor: {
     switch (wiredState) {
-      case 0: return mouseArea.containsMouse ? Colors.error : Colors.border // Unknown (Not plugged in).
+      case 0: return mouseArea.containsMouse ? Colors.error : Colors.border // Unknown (Not plugged in)
       case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
       case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
       case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
@@ -42,7 +37,7 @@ Rectangle {
 
   property string iconColor: {
     switch (wiredState) {
-      case 0: return mouseArea.containsMouse ? Colors.surface : Colors.text // Unknown (Not plugged in).
+      case 0: return mouseArea.containsMouse ? Colors.surface : Colors.text // Unknown (Not plugged in)
       case 1: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connecting
       case 2: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connected
       case 3: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Disconnecting
@@ -50,6 +45,14 @@ Rectangle {
     }
   }
 
+
+  // Network stuff
+  readonly property var wiredDevice: Networking.devices.values.find(d => d.type === DeviceType.Wired)
+  readonly property bool wiredActive: wiredDevice.connected
+  readonly property var wiredState: parseInt(wiredDevice.state.toString())
+
+
+  // Button stuff
   Text {
     text: String.fromCodePoint("0xF0200")
     color: iconColor
