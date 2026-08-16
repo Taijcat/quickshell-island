@@ -1,4 +1,4 @@
 # Config/qmldir
 module Config
-singleton Colors 1.0 Colors.qml
+singleton Colors 1.0 ColorsGruvbox.qml
 singleton Metrics 1.0 Metrics.qml
