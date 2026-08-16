@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Networking
@@ -17,11 +18,11 @@ Rectangle {
   // Color stuff
   property string buttonColor: {
       switch (wiredState) {
-        case 0: return mouseArea.containsMouse ? Colors.error : Colors.surface // Unknown (Not plugged in)
+        case 0: return mouseArea.containsMouse ? Colors.overlay : Colors.surface // Unknown (Not plugged in)
         case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
         case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
         case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
-        case 4: return mouseArea.containsMouse ? Colors.hint : Colors.surface // Disconnected
+        case 4: return mouseArea.containsMouse ? Colors.overlay : Colors.surface // Disconnected
       }
   }
 
@@ -37,11 +38,11 @@ Rectangle {
 
   property string iconColor: {
     switch (wiredState) {
-      case 0: return mouseArea.containsMouse ? Colors.surface : Colors.text // Unknown (Not plugged in)
+      case 0: return mouseArea.containsMouse ? Colors.text : Colors.text // Unknown (Not plugged in)
       case 1: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connecting
       case 2: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connected
       case 3: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Disconnecting
-      case 4: return mouseArea.containsMouse ? Colors.surface : Colors.text // Disconnected
+      case 4: return mouseArea.containsMouse ? Colors.text : Colors.text // Disconnected
     }
   }
 
@@ -50,6 +51,11 @@ Rectangle {
   readonly property var wiredDevice: Networking.devices.values.find(d => d.type === DeviceType.Wired)
   readonly property bool wiredActive: wiredDevice.connected
   readonly property var wiredState: parseInt(wiredDevice.state.toString())
+
+  Process {
+    id:nmtuiLaunch
+    command: ["kitty", "nmtui"]
+  }
 
 
   // Button stuff
@@ -67,10 +73,16 @@ Rectangle {
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    onClicked: {
-      wiredActive ? (wiredDevice.network.disconnect()) : (wiredDevice.autoreconnect = true , wiredDevice.network.connect())
+    acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+    onClicked: (mouse) => {
+      if (mouse.button == Qt.MiddleButton) { nmtuiLaunch.running = true }
+      if (mouse.button == Qt.LeftButton) {
+        wiredActive ? (wiredDevice.network.disconnect()) : (wiredDevice.autoreconnect = true , wiredDevice.network.connect())
+      }
     }
   }
+
+
 
   Behavior on color {
     ColorAnimation {duration: Metrics.animationLength}

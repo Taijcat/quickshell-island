@@ -18,18 +18,18 @@ Rectangle {
 
   // Color stuff
   property string buttonColor: {
-      switch (wifiState) {
-        case 0: return mouseArea.containsMouse ? Colors.error : Colors.surface // Unknown (Blocked)
-        case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
-        case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
-        case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
-        case 4: return mouseArea.containsMouse ? Colors.hint : Colors.surface // Disconnected
-      }
+    switch (wifiState) {
+      case 0: return mouseArea.containsMouse ? Colors.overlay : Colors.surface // Unknown (Not plugged in)
+      case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
+      case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
+      case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
+      case 4: return mouseArea.containsMouse ? Colors.overlay : Colors.surface // Disconnected
+    }
   }
 
   property string borderColor: {
     switch (wifiState) {
-      case 0: return mouseArea.containsMouse ? Colors.error : Colors.border // Unknown (Blocked)
+      case 0: return mouseArea.containsMouse ? Colors.error : Colors.border // Unknown (Not plugged in)
       case 1: return mouseArea.containsMouse ? Colors.hint : Colors.success // Connecting
       case 2: return mouseArea.containsMouse ? Colors.hint : Colors.accent // Connected
       case 3: return mouseArea.containsMouse ? Colors.hint : Colors.info // Disconnecting
@@ -39,11 +39,11 @@ Rectangle {
 
   property string iconColor: {
     switch (wifiState) {
-      case 0: return mouseArea.containsMouse ? Colors.surface : Colors.text // Unknown (Blocked)
+      case 0: return mouseArea.containsMouse ? Colors.text : Colors.text // Unknown (Not plugged in)
       case 1: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connecting
       case 2: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Connected
       case 3: return mouseArea.containsMouse ? Colors.surface : Colors.surface // Disconnecting
-      case 4: return mouseArea.containsMouse ? Colors.surface : Colors.text // Disconnected
+      case 4: return mouseArea.containsMouse ? Colors.text : Colors.text // Disconnected
     }
   }
 
@@ -98,9 +98,9 @@ Rectangle {
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    acceptedButtons: Qt.LeftButton | Qt.MiddleButton
     onClicked: (mouse) => {
-      if (mouse.button == Qt.RightButton) { nmtuiLaunch.running = true }
+      if (mouse.button == Qt.MiddleButton) { nmtuiLaunch.running = true }
       if (mouse.button == Qt.LeftButton) { 
         rfkillToggle.command = wifiBlocked ? ["rfkill", "unblock", "wifi"] : ["rfkill", "block", "wifi"]
         rfkillToggle.running = true
