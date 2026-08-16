@@ -14,6 +14,10 @@ You need to symlink the repo to ```~/.config/quickshell``` to be able to access 
 ```sh
 ln -s quickshell-island/ ~/.config/quickshell
 ```
+
+## Configuration
+The code itself is self documenting™, but comments are available. Configuration can be done in the ```Config``` directory. The shell assumes kitty as terminal. Editing the ```qmldir``` in ```Connfig/``` handles changing of themes (dynamic theme switching will be implemented at a later date)
+
 ## Things to add
 - Dynamic theme switching (backend)
 - Dynamic theme switching (frontend)
