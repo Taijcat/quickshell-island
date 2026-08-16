@@ -56,7 +56,7 @@ Rectangle {
     anchors.centerIn: parent
     font {
       family: "JetBrainsMono Nerd Font Propo"
-      pixelSize: 20
+      pixelSize: Metrics.iconSize
     }
   }
 

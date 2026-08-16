@@ -9,16 +9,9 @@ import "Style"
 ShellRoot {
   Variants{
     model: Quickshell.screens
-
-
     PanelWindow {
       id: root
       visible: !isFullscreen
-
-      // Hardcoded Values
-      readonly property int animationLength: 150
-      readonly property real roundingRadius: 11.5 // Half the height of the island when only the clock is active
-      readonly property int islandPadding: 6
 
       // Make quickshell work with multiple screens
       required property var modelData
@@ -56,7 +49,7 @@ ShellRoot {
         y: 8
         width: content.implicitWidth + 14
         height: content.implicitHeight + 6
-        radius: roundingRadius
+        radius: Metrics.roundingRadius
         color: Colors.base
         antialiasing: true
         clip: true

@@ -2,3 +2,4 @@
 module ControlCenter.HomeButtons
 Button 1.0 Button.qml
 Ethernet 1.0 Ethernet.qml
+Wifi 1.0 Wifi.qml

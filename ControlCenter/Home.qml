@@ -13,8 +13,11 @@ Item {
   required property var parentWindow
 
 
-  implicitWidth: showHome ? content.implicitWidth + islandPadding : 0
-  implicitHeight: showHome ? content.implicitHeight + islandPadding * 2 : 0
+  focus: showHome
+  Keys.onEscapePressed: root.showHome = false
+
+  implicitWidth: showHome ? content.implicitWidth + Metrics.islandPadding : 0
+  implicitHeight: showHome ? content.implicitHeight + Metrics.islandPadding * 2 : 0
 
 ColumnLayout {
   id: content
