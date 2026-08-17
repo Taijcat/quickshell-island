@@ -29,6 +29,11 @@ ColumnLayout {
   Ethernet {}
   Wifi {}
   Bluetooth {}
+  }
+  RowLayout {
+  spacing: Metrics.spacingInMenu
+  Button {}
+  Button {}
   Button {}
   }
 }
