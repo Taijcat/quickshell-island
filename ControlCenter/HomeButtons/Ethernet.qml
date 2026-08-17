@@ -8,8 +8,8 @@ import "../../Config/"
 // Boilerplate code for a button. For use in debugging and writing actually good buttons.
 Rectangle {
   // Boilerplate
-  Layout.preferredWidth: Metrics.buttonWidth
-  Layout.preferredHeight: Metrics.buttonWidth
+  Layout.preferredWidth: 56
+  Layout.preferredHeight: 56
   antialiasing: true
   radius: Metrics.roundingRadius
   color: buttonColor

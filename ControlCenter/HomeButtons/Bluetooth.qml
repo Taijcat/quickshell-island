@@ -6,8 +6,8 @@ import Quickshell.Bluetooth
 import "../../Config/"
 
 Rectangle {
-  Layout.preferredWidth: Metrics.buttonWitdh
-  Layout.preferredHeight: Metrics.buttonHeight
+  Layout.preferredWidth: 56
+  Layout.preferredHeight: 56
   antialiasing: true
   radius: Metrics.roundingRadius
   color: buttonColor
