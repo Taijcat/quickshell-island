@@ -54,8 +54,6 @@ Rectangle{
     }
   }
 
-
-
   MouseArea {
     id: mouseArea
     anchors.fill: parent
@@ -75,10 +73,17 @@ Rectangle{
 
     Text {
       text: icon
-      color: Colors.text
+      color: root.muted ? Colors.error : Colors.text
       font {
         family: "JetBrainsMono Nerd Font Propo"
-        pixelSize: Metrics.textSize
+        pixelSize: Metrics.textSize * Metrics.iconSizeMult
+      }
+      MouseArea{
+        id: muteArea
+        anchors.fill: parent
+        onClicked: {
+          sink.audio.muted = !sink.audio.muted
+        }
       }
     }
 
@@ -99,13 +104,18 @@ Rectangle{
         Rectangle {
           width: volumeSlider.visualPosition * parent.width
           height: parent.height
-          radius: 3
-          color: Colors.accent
-        }
+          radius: this.height / 2
+          color: root.muted ? Colors.error : Colors.accent
+          Behavior on height {
+            NumberAnimation{
+              duration: Metrics.animationLength / 2
+            }
+          }
 
-        Behavior on height {
-          NumberAnimation{
-            duration: Metrics.animationLength / 2
+          Behavior on color {
+            ColorAnimation{
+              duration: Metrics.animationLength / 2
+            }
           }
         }
       }
@@ -115,10 +125,15 @@ Rectangle{
         x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
         y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
         implicitWidth: Metrics.textSize / 2
-        implicitHeight: Metrics.textSize
+        implicitHeight: volumeSlider.pressed ? Metrics.textSize * Metrics.iconSizeMult : Metrics.textSize
         radius: implicitHeight / 2
-        color: volumeSlider.pressed ? "#f0f0f0" : "#f6f6f6"
+        color: Colors.text
         border.color: "#bdbebf"
+        Behavior on height {
+          NumberAnimation{
+            duration: Metrics.animationLength / 2
+          }
+        }
       }
 
       value: Pipewire.defaultAudioSink?.audio.volume ?? 0.0
@@ -127,7 +142,7 @@ Rectangle{
 
     Text {
       text: vol + "%"
-      color: Colors.text
+      color: root.muted ? Colors.error : Colors.text
       font {
         family: "JetBrainsMono Nerd Font Propo"
         pixelSize: Metrics.textSize
