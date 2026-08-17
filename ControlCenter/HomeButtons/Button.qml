@@ -38,8 +38,8 @@ Rectangle {
     command: ["kitty"]
   }
 
-  Layout.preferredWidth: 56
-  Layout.preferredHeight: 56
+  Layout.preferredWidth: Metrics.buttonWidth
+  Layout.preferredHeight: Metrics.buttonHeight
   antialiasing: true
   radius: Metrics.roundingRadius
   color: buttonColor
