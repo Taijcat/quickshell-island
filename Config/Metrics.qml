@@ -11,6 +11,9 @@ QtObject {
   readonly property real roundingRadius: 12 // Half the height of the island when only the clock is active
   readonly property int borderWidth: 150
   readonly property int spacingInMenu: 5
+  readonly property int buttonHeight: 56
+  readonly property int buttonWidth: 56
+  readonly property int buttonPadding: 3
 
   // Fonts
   readonly property string textFont: "Google Sans Flex"
