@@ -24,6 +24,13 @@ Rectangle{
 
 
   // Button logic
+    Process {
+    id: pavucontrolLaunch
+    command: ["pavucontrol"]
+  }
+
+
+
   readonly property string icon: {
 
     if (!ready) return String.fromCodePoint(0xF0581)
@@ -58,10 +65,12 @@ Rectangle{
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
+    acceptedButtons: Qt.MiddleButton
     onWheel: (wheel) => {
       if (wheel.angleDelta.y > 0) { increaseVolume(0.01) }
       if (wheel.angleDelta.y < 0) { decreaseVolume(0.01) }
     }
+    onClicked: pavucontrolLaunch.running = true
   }
 
   RowLayout{
