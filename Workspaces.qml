@@ -5,7 +5,6 @@ import QtQuick.Layouts
 import "Config"
 
 RowLayout {
-
   id:root
   property bool showing: false
   visible: showing
