@@ -24,13 +24,19 @@ ColumnLayout {
   visible: showHome
   anchors.centerIn: parent
   spacing: Metrics.spacingInMenu
+
   RowLayout {
   spacing: Metrics.spacingInMenu
   Ethernet {}
   Wifi {}
   Bluetooth {}
-  Button {}
   }
+
+  RowLayout {
+  spacing: Metrics.spacingInMenu
+  VolumeSlider { length : content.implicitWidth }
+  }
+
 }
 
   HyprlandFocusGrab {
