@@ -3,23 +3,23 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import "Config"
+import "Island"
 
 RowLayout {
   id: root
-  property bool showing: false
-  visible: showing
+  visible: IslandState.activeModule === IslandTypes.Module.Workspaces
 
   Timer {
     id: workspaceTimer
     interval: 500
-    onTriggered: root.showing = false
+    onTriggered: IslandState.restore()
   }
 
   Connections {
     target: Hyprland
     function onRawEvent(event) {
       if (event.name === "workspace" || event.name === "workspacev2") {
-        root.showing = true
+        IslandState.show(IslandTypes.Module.Workspaces)
         workspaceTimer.restart()
       }
     }

@@ -1,0 +1,4 @@
+# Island/qmldir
+module Island
+singleton IslandState 1.0 IslandState.qml
+singleton IslandTypes 1.0 IslandTypes.qml

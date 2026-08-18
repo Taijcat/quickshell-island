@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import "ControlCenter"
 import "Config"
+import "Island"
 
 ShellRoot {
   Variants{
@@ -47,8 +48,8 @@ ShellRoot {
         id: island
         anchors.horizontalCenter: parent.horizontalCenter
         y: 8
-        width: content.implicitWidth + 14
-        height: content.implicitHeight + 6
+        implicitWidth: content.implicitWidth + 14
+        implicitHeight: content.implicitHeight + 6
         radius: Metrics.roundingRadius
         color: Colors.base
         antialiasing: true
@@ -60,21 +61,13 @@ ShellRoot {
         Behavior on height {
           NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
         }
-
         RowLayout {
           id: content
           anchors.centerIn: parent
           spacing: 0
-          Clock {
-            visible: !controlCenterHome.showHome && !workspaces.showing
-            onClicked: controlCenterHome.showHome = true
-          }
-          Workspaces { id: workspaces }
-          ControlCenterHome {
-            id: controlCenterHome
-            parentWindow: root
-            visible: !workspaces.showing
-          }
+          Clock { onClicked: IslandState.show( IslandState.Module.Home ) }
+          Workspaces {}
+          ControlCenterHome { parentWindow: root }
         }
       }
     }

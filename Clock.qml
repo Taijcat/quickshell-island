@@ -1,11 +1,12 @@
 import Quickshell
 import QtQuick
 import "Config"
+import "Island"
 
 Text {
   id:root
   signal clicked()
-
+  visible: IslandState.activeModule === IslandTypes.Module.Clock
   text: Qt.formatDateTime(clock.date, "hh:mm")
   color: Colors.text
 
