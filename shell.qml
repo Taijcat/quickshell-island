@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import "ControlCenter"
 import "Config"
+import "Island"
 
 ShellRoot {
   Variants{
@@ -16,7 +17,7 @@ ShellRoot {
       // Make quickshell work with multiple screens
       required property var modelData
       screen: modelData
-      WlrLayershell.namespace: "quickshell:island" // Hyprland bullshit
+      WlrLayershell.namespace: "quickshell:island" // Hyprland stuff
 
       // Check for fullscreen
       property bool isFullscreen: { 
@@ -47,34 +48,32 @@ ShellRoot {
         id: island
         anchors.horizontalCenter: parent.horizontalCenter
         y: 8
-        width: content.implicitWidth + 14
-        height: content.implicitHeight + 6
+        implicitWidth: content.implicitWidth + 14
+        implicitHeight: content.implicitHeight + Metrics.islandVertPadding
         radius: Metrics.roundingRadius
         color: Colors.base
         antialiasing: true
         clip: true
 
-        Behavior on width {
-          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
-        }
-        Behavior on height {
-          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
+        Component.onCompleted: {
+          Qt.callLater(() => {
+            Metrics.islandHeight = height
+          })
         }
 
+        Behavior on implicitWidth {
+          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
+        }
+        Behavior on implicitHeight {
+          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
+        }
         RowLayout {
           id: content
           anchors.centerIn: parent
           spacing: 0
-          Clock {
-            visible: !controlCenterHome.showHome && !workspaces.showing
-            onClicked: controlCenterHome.showHome = true
-          }
-          Workspaces { id: workspaces }
-          ControlCenterHome {
-            id: controlCenterHome
-            parentWindow: root
-            visible: !workspaces.showing
-          }
+          Clock { onClicked: IslandState.show( IslandState.Module.Home ) }
+          Workspaces {}
+          ControlCenterHome { parentWindow: root }
         }
       }
     }

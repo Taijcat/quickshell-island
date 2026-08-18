@@ -5,51 +5,48 @@ import QtQuick
 import QtQuick.Layouts
 import "../Config/"
 import "HomeButtons"
+import "../Island"
 
 
 Item {
   id: root
-  property bool showHome: false
+  visible: IslandState.activeModule === IslandTypes.Module.Home
   required property var parentWindow
+  focus: IslandState.activeModule === IslandTypes.Module.Home
+  Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
 
+  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitWidth : 0
+  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
-  focus: showHome
-  Keys.onEscapePressed: root.showHome = false
+  ColumnLayout {
+    id: content
+    anchors.centerIn: parent
+    spacing: Metrics.spacingInMenu
 
-  implicitWidth: showHome ? content.implicitWidth + Metrics.islandPadding : 0
-  implicitHeight: showHome ? content.implicitHeight + Metrics.islandPadding * 2 : 0
+    RowLayout {
+      spacing: Metrics.spacingInMenu
+      Ethernet {}
+      Wifi {}
+      Bluetooth {}
+    }
 
-ColumnLayout {
-  id: content
-  visible: showHome
-  anchors.centerIn: parent
-  spacing: Metrics.spacingInMenu
+    RowLayout {
+      spacing: Metrics.spacingInMenu
+      VolumeSlider { length : content.implicitWidth }
+    }
 
-  RowLayout {
-  spacing: Metrics.spacingInMenu
-  Ethernet {}
-  Wifi {}
-  Bluetooth {}
   }
-
-  RowLayout {
-  spacing: Metrics.spacingInMenu
-  VolumeSlider { length : content.implicitWidth }
-  }
-
-}
 
   HyprlandFocusGrab {
     windows: [root.parentWindow]
-    active: root.showHome
-    onCleared: root.showHome = false
+    active: IslandState.activeModule === IslandTypes.Module.Home
+    onCleared: IslandState.show(IslandTypes.Module.Clock)
   }
 
   IpcHandler {
     target: "controlCenter"
-
     function toggle(): void{
-      root.showHome = !root.showHome
+      IslandState.activeModule === IslandTypes.Module.Home ? (IslandState.show(IslandTypes.Module.Clock)) : (IslandState.show(IslandTypes.Module.Home))
     }
   }
 }

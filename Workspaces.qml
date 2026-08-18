@@ -3,23 +3,23 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import "Config"
+import "Island"
 
 RowLayout {
   id: root
-  property bool showing: false
-  visible: showing
+  visible: IslandState.activeModule === IslandTypes.Module.Workspaces
 
   Timer {
     id: workspaceTimer
     interval: 500
-    onTriggered: root.showing = false
+    onTriggered: IslandState.restore()
   }
 
   Connections {
     target: Hyprland
     function onRawEvent(event) {
       if (event.name === "workspace" || event.name === "workspacev2") {
-        root.showing = true
+        IslandState.show(IslandTypes.Module.Workspaces)
         workspaceTimer.restart()
       }
     }
@@ -36,8 +36,8 @@ RowLayout {
       property var ws: modelData
       property bool isActive: Hyprland.focusedWorkspace?.id === ws.id
 
+      implicitHeight: label.implicitHeight
       implicitWidth: label.implicitWidth + 14
-      implicitHeight: 22
       radius: 15
       color: "transparent"
       Behavior on color {
@@ -50,9 +50,9 @@ RowLayout {
         text: "󰝥"
         color: isActive ? Colors.hint : (wsButton.ws ? Colors.accent : Colors.text)
         font {
-          family: "Google Sans Flex"
+          family: Metrics.iconFont
           letterSpacing: -1
-          pixelSize: 15
+          pixelSize: Metrics.textSize
           weight: isActive ? 600 : 400
         }
       }
