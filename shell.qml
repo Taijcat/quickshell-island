@@ -17,7 +17,7 @@ ShellRoot {
       // Make quickshell work with multiple screens
       required property var modelData
       screen: modelData
-      WlrLayershell.namespace: "quickshell:island" // Hyprland bullshit
+      WlrLayershell.namespace: "quickshell:island" // Hyprland stuff
 
       // Check for fullscreen
       property bool isFullscreen: { 
@@ -49,16 +49,22 @@ ShellRoot {
         anchors.horizontalCenter: parent.horizontalCenter
         y: 8
         implicitWidth: content.implicitWidth + 14
-        implicitHeight: content.implicitHeight + 6
+        implicitHeight: content.implicitHeight + Metrics.islandVertPadding
         radius: Metrics.roundingRadius
         color: Colors.base
         antialiasing: true
         clip: true
 
-        Behavior on width {
+        Component.onCompleted: {
+          Qt.callLater(() => {
+            Metrics.islandHeight = height
+          })
+        }
+
+        Behavior on implicitWidth {
           NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
         }
-        Behavior on height {
+        Behavior on implicitHeight {
           NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
         }
         RowLayout {

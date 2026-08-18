@@ -5,15 +5,18 @@ import QtQuick
 // Hardcoded Values
 QtObject {
   // Decorations
-  readonly property real clockReservedHeight: 32 // Hardcoded value. Change later (I will never change ts)
-  readonly property int islandPadding: 6
+  readonly property int islandVertPadding: 6
   readonly property int animationLength: 150
-  readonly property real roundingRadius: 12 // Half the height of the island when only the clock is active
   readonly property int borderWidth: 150
   readonly property int spacingInMenu: 5
   readonly property int buttonHeight: 56
   readonly property int buttonWidth: 56
   readonly property int buttonPadding: 3
+  readonly property int edgePadding: 8
+
+  property int islandHeight: 0
+  property real roundingRadius: islandHeight / 2 // Half the height of the island when only the clock is active
+  property real clockReservedHeight: islandHeight + edgePadding
 
   // Fonts
   readonly property string textFont: "Google Sans Flex"

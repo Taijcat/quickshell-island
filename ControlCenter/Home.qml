@@ -15,8 +15,8 @@ Item {
   focus: IslandState.activeModule === IslandTypes.Module.Home
   Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
 
-  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitWidth + Metrics.islandPadding : 0
-  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitHeight + Metrics.islandPadding * 2 : 0
+  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitWidth : 0
+  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
   ColumnLayout {
     id: content
