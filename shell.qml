@@ -71,7 +71,7 @@ ShellRoot {
           id: content
           anchors.centerIn: parent
           spacing: 0
-          Clock { onClicked: IslandState.show( IslandState.Module.Home ) }
+          Clock { onClicked: IslandState.show( IslandTypes.Module.Home ) }
           Workspaces {}
           ControlCenterHome { parentWindow: root }
         }
