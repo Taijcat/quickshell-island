@@ -2,8 +2,8 @@ import Quickshell
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
-import "Config"
-import "Island"
+import "../Config"
+import "../Island"
 
 RowLayout {
   id: root

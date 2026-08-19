@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
-import "Config"
-import "Island"
+import "../Config"
+import "../Island"
 
 Text {
   id:root
