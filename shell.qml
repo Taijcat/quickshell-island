@@ -75,6 +75,7 @@ ShellRoot {
           Clock { onClicked: IslandState.show( IslandTypes.Module.Home ) }
           Workspaces {}
           ControlCenterHome { parentWindow: root }
+          VolumeOSD{}
         }
       }
     }

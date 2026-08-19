@@ -13,6 +13,7 @@ QtObject {
   readonly property int buttonWidth: 56
   readonly property int buttonPadding: 3
   readonly property int edgePadding: 8
+  readonly property int osdWidth: 150
 
   property int islandHeight: 0
   property real roundingRadius: islandHeight / 2 // Half the height of the island when only the clock is active

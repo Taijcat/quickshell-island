@@ -4,13 +4,14 @@ import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "../../Config/"
+import "../Config/"
+import "../Island"
 
 Rectangle{
   // Boilerplate
   id:root
-  required property int length
-  Layout.fillWidth: true
+  visible: IslandState.activeModule === IslandTypes.Module.VolumeOSD
+  implicitWidth: Metrics.osdWidth
   Layout.preferredHeight: Metrics.textSize + Metrics.buttonPadding
   antialiasing: true
   color: "transparent"
@@ -22,14 +23,24 @@ Rectangle{
   readonly property bool muted: sink && sink.audio.muted
   readonly property int vol: ready ? Math.round(sink.audio.volume * 100) : 0
 
-
-  // Button logic
-    Process {
-    id: pavucontrolLaunch
-    command: ["pavucontrol"]
+  Timer{
+    id: volumeTimer
+    interval: 500
+    onTriggered: IslandState.restore()
   }
 
-
+  onVolChanged: {
+    if (IslandState.activeModule !== IslandTypes.Module.Home) {
+      IslandState.show(IslandTypes.Module.VolumeOSD)
+      volumeTimer.restart()
+    }
+  }
+  onMutedChanged: {
+    if (IslandState.activeModule !== IslandTypes.Module.Home) {
+      IslandState.show(IslandTypes.Module.VolumeOSD)
+      volumeTimer.restart()
+    }
+  }
 
   readonly property string icon: {
 
@@ -42,42 +53,10 @@ Rectangle{
     return String.fromCodePoint(0xF057E)
   }
 
-  function increaseVolume(step: real): void {
-    if (sink && sink.audio) {
-      sink.audio.volume = Math.max(0.0, Math.min(1.0, sink.audio.volume + step) )
-    }
-  }
-
-  function decreaseVolume(step: real): void {
-    if (sink && sink.audio) {
-      sink.audio.volume = Math.max(0.0, Math.min(1.0, sink.audio.volume - step) )
-    }
-  }
-
-
-  function setVolume(value: real): void {
-    if (sink && sink.audio) {
-      sink.audio.volume = Math.max(0.0, Math.min(1.0, value) )
-    }
-  }
-
-  MouseArea {
-    id: mouseArea
-    anchors.fill: parent
-    hoverEnabled: true
-    acceptedButtons: Qt.MiddleButton
-    onWheel: (wheel) => {
-      if (wheel.angleDelta.y > 0) { increaseVolume(0.01) }
-      if (wheel.angleDelta.y < 0) { decreaseVolume(0.01) }
-    }
-    onClicked: pavucontrolLaunch.running = true
-  }
-
   RowLayout{
     anchors.centerIn: parent
-    width: parent.width
     spacing: Metrics.spacingInMenu
-
+    width: parent.implicitWidth
     anchors.leftMargin: Metrics.spacingInMenu
     anchors.rightMargin: Metrics.spacingInMenu
 
@@ -88,28 +67,30 @@ Rectangle{
         family: "JetBrainsMono Nerd Font Propo"
         pixelSize: Metrics.textSize * Metrics.iconSizeMult
       }
-      MouseArea{
-        id: muteArea
-        anchors.fill: parent
-        onClicked: {
-          sink.audio.muted = !sink.audio.muted
-        }
-      }
     }
 
     Slider {
       id: volumeSlider
-      Layout.topMargin: -0.5
-      Layout.alignment: Qt.AlignVCenter
+      Layout.topMargin: -1
+
       from: 0.0
       to: 1.0
       Layout.fillWidth:true
+      Layout.alignment: Qt.AlignVCenter
+
+
+      topPadding: 0
+      bottomPadding: 0
+      leftPadding: 0
+      rightPadding: 0
+
       background: Rectangle {
         x: volumeSlider.leftPadding
-        y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
+        y: volumeSlider.topPadding + Math.round((volumeSlider.availableHeight - height) / 2)
         width: volumeSlider.availableWidth
-        height: volumeSlider.pressed ? (Metrics.textSize / 2) : Metrics.textSize / 3
-        radius: this.height / 2
+        implicitHeight: Metrics.textSize / 3
+        height: implicitHeight
+        radius: height / 2
         color: Colors.surface
 
         Rectangle {
@@ -130,21 +111,14 @@ Rectangle{
           }
         }
       }
-
-
       handle: Rectangle {
         x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
         y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
         implicitWidth: Metrics.textSize / 2
-        implicitHeight: volumeSlider.pressed ? Metrics.textSize * Metrics.iconSizeMult : Metrics.textSize
+        implicitHeight: Metrics.textSize
         radius: implicitHeight / 2
         color: Colors.text
         border.color: "#bdbebf"
-        Behavior on height {
-          NumberAnimation{
-            duration: Metrics.animationLength / 2
-          }
-        }
       }
 
       value: Pipewire.defaultAudioSink?.audio.volume ?? 0.0
