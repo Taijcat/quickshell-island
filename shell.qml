@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import "ControlCenter"
 import "Config"
 import "Island"
+import "OSDs"
 
 ShellRoot {
   Variants{
