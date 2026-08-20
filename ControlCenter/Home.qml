@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import "../Config/"
 import "HomeWidgets"
 import "../Island"
+import "Visualizer"
 
 
 Item {
@@ -43,15 +44,7 @@ Item {
       }
       VolumeSlider {length: content.width}
     }
-    Rectangle{
-      id: visualiserPlaceholder
-      color: Colors.surface
-      border.color: Colors.border
-      radius: Metrics.roundingRadius
-      implicitHeight: content.height
-      implicitWidth: 100
-
-    }
+    Visualizer{}
   }
 
   HyprlandFocusGrab {

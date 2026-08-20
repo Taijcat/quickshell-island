@@ -28,5 +28,9 @@ QtObject {
 
   // Config
   readonly property string terminal: "kitty"
-  
+  readonly property int avBarCountHome: 90 // MANUALLY SYNC WITH cava.conf !!!!!
+  readonly property int avBarSpacingHome: 1
+  readonly property int avBarHeightHome: 3
+  readonly property int avBarWidthHome: 100
+
 }
