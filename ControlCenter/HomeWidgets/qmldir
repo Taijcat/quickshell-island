@@ -1,7 +1,8 @@
-# ControlCenter/HomeButtons/qmldir
-module ControlCenter.HomeButtons
+# ControlCenter/HomeWidgets/qmldir
+module ControlCenter.HomeWidgets
 Button 1.0 Button.qml
 Ethernet 1.0 Ethernet.qml
 Wifi 1.0 Wifi.qml
 Bluetooth 1.0 Bluetooth.qml
 VolumeSlider 1.0 VolumeSlider.qml
+Media 1.0 Media.qml

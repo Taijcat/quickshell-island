@@ -4,8 +4,9 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import "../Config/"
-import "HomeButtons"
+import "HomeWidgets"
 import "../Island"
+import "Visualizer"
 
 
 Item {
@@ -15,26 +16,35 @@ Item {
   focus: IslandState.activeModule === IslandTypes.Module.Home
   Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
 
-  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitWidth : 0
-  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? content.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
+  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? main.implicitWidth : 0
+  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
-  ColumnLayout {
-    id: content
+  RowLayout{
+    id: main
     anchors.centerIn: parent
-    spacing: Metrics.spacingInMenu
-
-    RowLayout {
+    spacing: Metrics.spacingInMenu * 2
+    ColumnLayout{
+      id: content
       spacing: Metrics.spacingInMenu
-      Ethernet {}
-      Wifi {}
-      Bluetooth {}
+      Media {length: buttons.width}
+      ColumnLayout{
+        id: buttons
+        RowLayout{
+          spacing: Metrics.spacingInMenu
+          Ethernet {}
+          Wifi {}
+          Bluetooth {}
+        }
+        RowLayout{
+          spacing: Metrics.spacingInMenu
+          Button {}
+          Button {}
+          Button {}
+        }
+      }
+      VolumeSlider {length: content.width}
     }
-
-    RowLayout {
-      spacing: Metrics.spacingInMenu
-      VolumeSlider { length : content.implicitWidth }
-    }
-
+    Visualizer{}
   }
 
   HyprlandFocusGrab {
