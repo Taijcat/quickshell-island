@@ -5,7 +5,6 @@ import "../Island"
 
 Text {
   id:root
-  signal clicked()
   visible: IslandState.activeModule === IslandTypes.Module.Clock
   text: Qt.formatDateTime(clock.date, "hh:mm")
   color: Colors.text
@@ -21,7 +20,7 @@ Text {
 
   MouseArea {
     anchors.fill: parent
-    onClicked: root.clicked()
+    onClicked: IslandState.show( IslandTypes.Module.Home )
   }
 }
 
