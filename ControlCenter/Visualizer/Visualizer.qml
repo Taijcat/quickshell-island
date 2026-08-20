@@ -77,7 +77,6 @@ frame_delimiter = 10
 [smoothing]
 noise_reduction = 80
 monstercat = 1
-scientific = 1
 EOF
 `]
   onExited: cava.running = true
