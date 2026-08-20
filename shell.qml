@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import Quickshell.Hyprland
 import Quickshell.Wayland
 import QtQuick
@@ -9,6 +10,12 @@ import "Island"
 import "OSDs"
 
 ShellRoot {
+  IpcHandler {
+    target: "controlCenter"
+    function toggle(): void {
+      IslandState.activeModule === IslandTypes.Module.Home ? (IslandState.show(IslandTypes.Module.Clock)) : (IslandState.show(IslandTypes.Module.Home))
+    }
+  }
   Variants{
     model: Quickshell.screens
     PanelWindow {

@@ -42,11 +42,4 @@ Item {
     active: IslandState.activeModule === IslandTypes.Module.Home
     onCleared: IslandState.show(IslandTypes.Module.Clock)
   }
-
-  IpcHandler {
-    target: "controlCenter"
-    function toggle(): void{
-      IslandState.activeModule === IslandTypes.Module.Home ? (IslandState.show(IslandTypes.Module.Clock)) : (IslandState.show(IslandTypes.Module.Home))
-    }
-  }
 }
