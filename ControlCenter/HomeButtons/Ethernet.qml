@@ -50,7 +50,7 @@ Rectangle {
   // Network stuff
   readonly property var wiredDevice: Networking.devices.values.find(d => d.type === DeviceType.Wired)
   readonly property bool wiredActive: wiredDevice.connected
-  readonly property var wiredState: parseInt(wiredDevice.state.toString())
+  readonly property var wiredState: wiredActive ? parseInt(wiredDevice.state.toString()) : 0
 
   Process {
     id:nmtuiLaunch
@@ -76,7 +76,7 @@ Rectangle {
     acceptedButtons: Qt.LeftButton | Qt.MiddleButton
     onClicked: (mouse) => {
       if (mouse.button == Qt.MiddleButton) { nmtuiLaunch.running = true }
-      if (mouse.button == Qt.LeftButton) {
+      if (mouse.button == Qt.LeftButton && wiredDevice) {
         wiredActive ? (wiredDevice.network.disconnect()) : (wiredDevice.autoreconnect = true , wiredDevice.network.connect())
       }
     }

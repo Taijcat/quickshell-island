@@ -52,7 +52,7 @@ Rectangle {
   // Network stuff
   readonly property var wifiDevice: Networking.devices.values.find(d => d.type === DeviceType.Wifi)
   readonly property var activeNetwork: wifiDevice ? wifiDevice.networks.values.find(n => n.connected) : null
-  readonly property var wifiState: parseInt(wifiDevice.state.toString())
+  readonly property var wifiState: wifiDevice ? parseInt(wifiDevice.state.toString()) : 0
   readonly property bool wifiBlocked: {
     if (wifiState.toString() == "0") { return true }
     return false

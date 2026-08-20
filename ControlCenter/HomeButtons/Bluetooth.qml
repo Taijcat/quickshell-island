@@ -14,25 +14,25 @@ Rectangle {
   border.color: borderColor
 
   property string buttonColor: {
-    if (!bluetoothAdapter.enabled) { return mouseArea.containsMouse ? Colors.overlay : Colors.surface }
+    if (!bluetoothAdapter || !bluetoothAdapter.enabled) { return mouseArea.containsMouse ? Colors.overlay : Colors.surface }
     if (!connectedDevice) { return mouseArea.containsMouse ? Colors.overlay : Colors.surface }
     if (connectedDevice) { return mouseArea.containsMouse ? Colors.hint : Colors.accent }
   }
 
   property string borderColor: {
-    if (!bluetoothAdapter.enabled) { return mouseArea.containsMouse ? Colors.error : Colors.border }
+    if (!bluetoothAdapter || !bluetoothAdapter.enabled) { return mouseArea.containsMouse ? Colors.error : Colors.border }
     if (!connectedDevice) { return mouseArea.containsMouse ? Colors.accent : Colors.border }
     if (connectedDevice) { return mouseArea.containsMouse ? Colors.hint : Colors.accent }
   }
 
   property string iconColor: {
-    if (!bluetoothAdapter.enabled) { return Colors.text }
+    if (!bluetoothAdapter || !bluetoothAdapter.enabled) { return Colors.text }
     if (!connectedDevice) { return Colors.text }
     if (connectedDevice) { return Colors.surface }
   }
 
   property string icon: {
-    if (!bluetoothAdapter.enabled) { return String.fromCodePoint(0xf00b2) }
+    if (!bluetoothAdapter || !bluetoothAdapter.enabled) { return String.fromCodePoint(0xf00b2) }
     if (!connectedDevice) { return String.fromCodePoint(0xf00af) }
     if (connectedDevice) { return String.fromCodePoint(0xf00b1) }
   }
@@ -63,7 +63,7 @@ Rectangle {
       if (mouse.button == Qt.RightButton) { 
         connectedDevice ? console.log("True") : console.log("False")
       }
-      if (mouse.button == Qt.LeftButton) { 
+      if (mouse.button == Qt.LeftButton && bluetoothAdapter) { 
         rfkillToggle.command = bluetoothAdapter.enabled ? ["rfkill", "block", "bluetooth"] : ["rfkill", "unblock", "bluetooth"]
         rfkillToggle.running = true
       }
