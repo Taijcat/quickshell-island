@@ -1,4 +1,4 @@
-# OSDs/qmldr
+# OSDs/qmldir
 module OSDs
 Clock 1.0 Clock.qml
 Workspaces 1.0 Workspaces.qml

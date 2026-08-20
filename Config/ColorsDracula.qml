@@ -2,7 +2,6 @@ pragma Singleton
 import QtQuick
 
 QtObject {
-  readonly property QtObject palette: Dracula
   // Surfaces
   readonly property color base:       "#191a21"
   readonly property color surface:    "#282a36"
