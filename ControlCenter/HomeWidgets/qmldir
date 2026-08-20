@@ -5,3 +5,4 @@ Ethernet 1.0 Ethernet.qml
 Wifi 1.0 Wifi.qml
 Bluetooth 1.0 Bluetooth.qml
 VolumeSlider 1.0 VolumeSlider.qml
+Media 1.0 Media.qml
