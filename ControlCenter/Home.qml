@@ -4,7 +4,7 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import "../Config/"
-import "HomeButtons"
+import "HomeWidgets"
 import "../Island"
 
 
