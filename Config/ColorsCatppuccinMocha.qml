@@ -26,7 +26,7 @@ QtObject {
   readonly property color gray:   "#7f849c"
 
   // Semantic accent
-  readonly property color accent:     "#fab387"
+  readonly property color accent:     "#89b4fa"
   readonly property color accentDim:  "#eba0ac"
   readonly property color accentText: "#11111b"
 
