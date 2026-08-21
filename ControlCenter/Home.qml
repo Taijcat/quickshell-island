@@ -37,7 +37,7 @@ Item {
         }
         RowLayout{
           spacing: Metrics.spacingInMenu
-          Button {}
+          Caffeine {}
           Button {}
           Button {}
         }
