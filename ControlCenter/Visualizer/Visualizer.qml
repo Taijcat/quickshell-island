@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Services.Mpris
 import QtQuick
 import QtQuick.Layouts
 import "../../Config/"
@@ -12,6 +13,14 @@ Rectangle{
   implicitHeight: content.height
   implicitWidth: Metrics.avBarWidthHome
   property var barValues: Array(Metrics.avBarCountHome).fill(0)
+
+  readonly property var player: {
+    const players = Mpris.players.values
+    if (players.length === 0) return null
+    return players.find(p => p.playbackState === MprisPlaybackState.Playing) ?? players[0]
+  }
+  readonly property bool active: player !== null
+  visible: active
 
   MouseArea{
     id: regenerateCava
