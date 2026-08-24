@@ -20,7 +20,7 @@ Rectangle{
     return players.find(p => p.playbackState === MprisPlaybackState.Playing) ?? players[0]
   }
   readonly property bool active: player !== null
-  visible: active
+  //visible: active
 
   MouseArea{
     id: regenerateCava

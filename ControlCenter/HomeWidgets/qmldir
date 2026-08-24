@@ -7,3 +7,4 @@ Bluetooth 1.0 Bluetooth.qml
 VolumeSlider 1.0 VolumeSlider.qml
 Media 1.0 Media.qml
 Caffeine 1.0 Caffeine.qml
+PowerMenu 1.0 PowerMenu.qml

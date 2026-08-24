@@ -20,7 +20,7 @@ RowLayout{
   }
   readonly property bool active: player !== null
   readonly property bool playing: active && player.playbackState === MprisPlaybackState.Playing
-  visible: active
+  //visible: active
 
   ColumnLayout{
     Item{
