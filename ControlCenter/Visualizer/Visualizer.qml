@@ -12,7 +12,9 @@ Rectangle{
   radius: Metrics.roundingRadius
   implicitHeight: content.height
   implicitWidth: Metrics.avBarWidthHome
-  property var barValues: Array(Metrics.avBarCountHome).fill(0)
+  required property int length
+  property int barCount: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / 4))
+  property var barValues: Array(root.barCount).fill(0)
 
   readonly property var player: {
     const players = Mpris.players.values
@@ -68,7 +70,7 @@ Rectangle{
   command: ["bash", "-c",
   `cat > /tmp/quickshell-cava.conf << 'EOF'
 [general]
-bars = ${Metrics.avBarCountHome}
+bars = ${root.barCount}
 framerate = 60
 
 [input]
@@ -90,14 +92,13 @@ EOF
 `]
   onExited: cava.running = true
 }
-
   ColumnLayout{
     id: bars
     anchors.centerIn: parent
     spacing: Metrics.avBarSpacingHome
 
     Repeater {
-      model: Metrics.avBarCountHome
+      model: root.barCount
       Rectangle{
         Layout.alignment: Qt.AlignCenter
         required property int index

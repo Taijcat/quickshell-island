@@ -42,10 +42,11 @@ Item {
         }
         Calendar {length: buttons.width}
       }
-      VolumeSlider {length: content.width}
+      //      VolumeSlider {length: content.width}
     }
-    Visualizer {}
+    Visualizer {length: content.height}
   }
+
 
   HyprlandFocusGrab {
     windows: [root.parentWindow]
