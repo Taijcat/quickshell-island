@@ -6,6 +6,7 @@ import QtQuick
 QtObject {
   // Decorations
   readonly property int islandVertPadding: 6
+  readonly property int islandHorizPadding: 14
   readonly property int animationLength: 150
   readonly property int borderWidth: 150
   readonly property int spacingInMenu: 5
@@ -25,6 +26,9 @@ QtObject {
   readonly property int iconSize: 25
   readonly property int textSize: 15
   readonly property real iconSizeMult: 1.25
+  readonly property real textSizeMult: 1.25
+  readonly property int fontBold: 600
+
 
   // Config
   readonly property string terminal: "kitty"

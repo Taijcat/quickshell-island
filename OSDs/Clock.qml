@@ -12,8 +12,8 @@ Text {
   font {
     family: "Google Sans Flex"
     letterSpacing: -0.5
-    pixelSize: 15
-    weight: 600
+    pixelSize: Metrics.textSize
+    weight: Metrics.fontBold
   }
 
   SystemClock { id: clock; precision: SystemClock.Minutes }

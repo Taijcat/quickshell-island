@@ -40,16 +40,11 @@ Item {
           Wifi {}
           Bluetooth {}
         }
-        RowLayout{
-          spacing: Metrics.spacingInMenu
-          Caffeine {}
-          Button {}
-          Button {}
-        }
+        Calendar {length: buttons.width}
       }
       VolumeSlider {length: content.width}
     }
-    Visualizer{}
+    Visualizer {}
   }
 
   HyprlandFocusGrab {

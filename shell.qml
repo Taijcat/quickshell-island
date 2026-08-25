@@ -56,7 +56,7 @@ ShellRoot {
         id: island
         anchors.horizontalCenter: parent.horizontalCenter
         y: 8
-        implicitWidth: content.implicitWidth + 14
+        implicitWidth: content.implicitWidth + Metrics.islandHorizPadding
         implicitHeight: content.implicitHeight + Metrics.islandVertPadding
         radius: Metrics.roundingRadius
         color: Colors.base
