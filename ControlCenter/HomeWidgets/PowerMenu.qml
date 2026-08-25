@@ -26,7 +26,6 @@ Rectangle {
     id: content
     anchors.verticalCenter: parent.verticalCenter
     anchors.left: parent.left
-    anchors.leftMargin: Metrics.paddingSmall
     spacing: Metrics.spacingInMenu
 
     Text {

@@ -11,13 +11,18 @@ import "Visualizer"
 
 Item {
   id: root
-  visible: IslandState.activeModule === IslandTypes.Module.Home
   required property var parentWindow
-  focus: IslandState.activeModule === IslandTypes.Module.Home
+
+  readonly property var thisMonitor: Hyprland.monitorFor(parentWindow.screen)
+  readonly property bool isActiveHere: IslandState.activeModule === IslandTypes.Module.Home
+                                        && thisMonitor === Hyprland.focusedMonitor
+
+  visible: isActiveHere
+  focus: isActiveHere
   Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
 
-  implicitWidth: IslandState.activeModule === IslandTypes.Module.Home ? main.implicitWidth : 0
-  implicitHeight: IslandState.activeModule === IslandTypes.Module.Home ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
+  implicitWidth: isActiveHere ? main.implicitWidth : 0
+  implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
   RowLayout{
     id: main
@@ -49,7 +54,7 @@ Item {
 
   HyprlandFocusGrab {
     windows: [root.parentWindow]
-    active: IslandState.activeModule === IslandTypes.Module.Home
+    active: isActiveHere
     onCleared: IslandState.show(IslandTypes.Module.Clock)
   }
 }
