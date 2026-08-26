@@ -20,18 +20,18 @@ ShellRoot {
     model: Quickshell.screens
     PanelWindow {
       id: root
+
+      property bool isFullscreen: { 
+        const mon = Hyprland.monitorFor(screen)
+        return mon && mon.activeWorkspace && mon.activeWorkspace.hasFullscreen
+      }
+
       visible: !isFullscreen
 
       // Make quickshell work with multiple screens
       required property var modelData
       screen: modelData
       WlrLayershell.namespace: "quickshell:island" // Hyprland stuff
-
-      // Check for fullscreen
-      property bool isFullscreen: { 
-        const mon = Hyprland.monitorFor(screen)
-        return mon && mon.activeWorkspace && mon.activeWorkspace.hasFullscreen
-      }
 
       // Give the clock some space
       WlrLayershell.layer: WlrLayer.Overlay 

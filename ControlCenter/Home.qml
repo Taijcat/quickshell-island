@@ -42,8 +42,12 @@ Item {
         Wifi      { Layout.column: 1; Layout.row: 0 }
         Bluetooth { Layout.column: 2; Layout.row: 0 }
         Caffeine  { Layout.column: 3; Layout.row: 0 }
-        Button    { Layout.column: 3; Layout.row: 1 }
-        Button    { Layout.column: 3; Layout.row: 2 }
+
+        UsageBars{
+          Layout.column: 3; Layout.row: 1
+          Layout.columnSpan: 1; Layout.rowSpan: 2
+          spanW: 1; spanH: 2
+        }
 
         BigClock{
           Layout.column: 3; Layout.row: 3
