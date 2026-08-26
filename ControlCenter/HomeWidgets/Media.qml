@@ -254,6 +254,7 @@ component MediaSlider: Item {
       Text{
         Layout.leftMargin: Metrics.edgePadding
         Layout.preferredWidth: parent.width - 2 *Metrics.edgePadding
+        horizontalAlignment: Text.AlignHCenter
         text: root.active ? (root.player.trackTitle || "Unknown track") : ""
         color: Colors.text
         elide: Text.ElideRight
@@ -267,6 +268,7 @@ component MediaSlider: Item {
       Text{
         Layout.leftMargin: Metrics.edgePadding
         Layout.preferredWidth: parent.width - 2 * Metrics.edgePadding
+        horizontalAlignment: Text.AlignHCenter
         text: root.active ? (root.player.trackArtist || "Unknown Artist") : ""
         color: Colors.text
         elide: Text.ElideRight
