@@ -32,8 +32,11 @@ QtObject {
 
   // Config
   readonly property string terminal: "kitty"
-  readonly property int avBarSpacingHome: 1
-  readonly property int avBarHeightHome: 3
+  readonly property int avBarSpacingHome: 3
+  readonly property int avBarHeightHome: 5
   readonly property int avBarWidthHome: 100
+  readonly property int waveAmp: 3
+  readonly property int waveLength: 25
+  readonly property int waveSpeed: 1200
 
 }
