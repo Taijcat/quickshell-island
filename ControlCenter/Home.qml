@@ -24,6 +24,7 @@ Item {
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
+
   RowLayout{
     id: main
     anchors.centerIn: parent
@@ -40,9 +41,9 @@ Item {
           Wifi {}
           Bluetooth {}
         }
-        Calendar {length: buttons.width}
+       // Calendar {length: buttons.width}
       }
-      //      VolumeSlider {length: content.width}
+      VolumeSlider {length: content.width}
     }
     Visualizer {length: content.height}
   }

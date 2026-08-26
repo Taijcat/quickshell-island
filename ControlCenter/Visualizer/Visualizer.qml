@@ -13,7 +13,10 @@ Rectangle{
   implicitHeight: content.height
   implicitWidth: Metrics.avBarWidthHome
   required property int length
-  property int barCount: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / 4))
+
+  property int barNumber: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / 4)) // Calculated number of bars
+  property int barCount: root.barNumber % 2 === 0 ? root.barNumber : root.barNumber - 1 // barCount for cava (requires even number for stereo output)
+
   property var barValues: Array(root.barCount).fill(0)
 
   readonly property var player: {
@@ -32,7 +35,6 @@ Rectangle{
       if (mouse.button == Qt.LeftButton) { killCava.running = true }
       if (mouse.button == Qt.RightButton) {
         killNoRegen.running = true 
-        root.barValues = Array(root.barCount).fill(0)
       }
     }
   }
@@ -92,6 +94,7 @@ EOF
 `]
   onExited: cava.running = true
 }
+
   ColumnLayout{
     id: bars
     anchors.centerIn: parent
