@@ -24,7 +24,6 @@ RowLayout{
   readonly property bool playing: active && player.playbackState === MprisPlaybackState.Playing
   //visible: active
 
-
 component MediaSlider: Item {
   id: slider
   implicitHeight: 16
@@ -35,17 +34,13 @@ component MediaSlider: Item {
   signal seekRequested(real position)
   signal seekStarted()
   signal seekFinished()
-
   readonly property real ratio: length > 0 ? position / length : 0
-
   property real waveAmplitude: (root.active && root.playing && !slider.seeking) ? Metrics.waveAmp : 0
-
   Behavior on waveAmplitude {
     NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.OutQuad }
   }
   property real waveLength: Metrics.waveLength
   property real phase: 0
-
   NumberAnimation on phase {
     running: root.playing && !slider.seeking
     loops: Animation.Infinite
@@ -54,7 +49,13 @@ component MediaSlider: Item {
     duration: Metrics.waveSpeed
   }
 
-  // unplayed track — only covers the remaining (not yet played) portion
+  // handle hover/press state, computed from dragArea below
+  readonly property real handleX: slider.width * slider.ratio
+  readonly property bool handleHovered: dragArea.containsMouse &&
+      Math.abs(dragArea.mouseX + dragArea.anchors.margins - slider.handleX) < 10
+  readonly property bool handleActive: slider.seeking || handleHovered
+
+  // unplayed track
   Rectangle {
     id: track
     anchors.verticalCenter: parent.verticalCenter
@@ -77,9 +78,7 @@ component MediaSlider: Item {
     layer.enabled: true
     layer.samples: 4
     clip: true
-
     property real strokeHalf: wavePath.strokeWidth / 2
-
     ShapePath {
       id: wavePath
       strokeColor: Colors.accent
@@ -89,11 +88,10 @@ component MediaSlider: Item {
       joinStyle: ShapePath.RoundJoin
       startX: waveShape.strokeHalf
       startY: waveShape.height / 2
-
       PathPolyline {
         path: {
           const pts = []
-          const w = waveShape.width - waveShape.strokeHalf  // logical wave width, unshifted
+          const w = waveShape.width - waveShape.strokeHalf
           const h = waveShape.height / 2
           const amp = slider.waveAmplitude
           const wl = slider.waveLength
@@ -109,18 +107,24 @@ component MediaSlider: Item {
   }
 
   Rectangle {
-    width: 12
-    height: 12
-    radius: 6
+    id: handle
+    width: slider.handleActive ? 16 : 12
+    height: width
+    radius: width / 2
     color: Colors.text
     anchors.verticalCenter: parent.verticalCenter
-    x: slider.width * slider.ratio - width / 2
+    x: slider.handleX - width / 2
+
+    Behavior on width {
+      NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.OutQuad }
+    }
   }
 
   MouseArea {
     id: dragArea
     anchors.fill: parent
     anchors.margins: -6
+    hoverEnabled: true
     onPressed: (mouse) => {
       slider.seeking = true
       slider.seekStarted()
@@ -135,7 +139,7 @@ component MediaSlider: Item {
       slider.seekFinished()
     }
     function updateFromMouse(x) {
-      const ratio = Math.max(0, Math.min(1, x / slider.width))
+      const ratio = Math.max(0, Math.min(1, (x - 6) / slider.width))
       slider.position = ratio * slider.length
       slider.seekRequested(slider.position)
     }
@@ -192,6 +196,7 @@ component MediaSlider: Item {
     radius: Metrics.roundingRadius
     color: Colors.surface
     border.color: Colors.border
+
     ColumnLayout{
       id:content
       Item{

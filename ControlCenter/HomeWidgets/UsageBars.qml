@@ -19,11 +19,17 @@ Rectangle {
     ColorAnimation {duration: Metrics.animationLength}
   }
 
+  SequentialAnimation {
+    id: flash
+    ColorAnimation { target: root; property: "color"; to: Colors.accent; duration: Metrics.animationLength }
+    ColorAnimation { target: root; property: "color"; to: Colors.surface; duration: Metrics.animationLength }
+  }
+
   MouseArea{
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    onClicked: btop.running = true
+    onClicked: btop.running = true, flash.start()
   }
 
   Process{

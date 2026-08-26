@@ -9,9 +9,26 @@ Rectangle {
   required property int spanW
   implicitWidth: Functions.spanToWidth(spanW)
   implicitHeight: Functions.spanToHeight(spanH)
-  color: Colors.surface
   radius: Metrics.roundingRadius
-  border.color: Colors.border
+
+  color: mouseArea.containsMouse ? Colors.overlay : Colors.surface
+  border.color: mouseArea.containsMouse ? Colors.accent : Colors.border
+
+  SequentialAnimation {
+    id: flash
+    ColorAnimation { target: root; property: "color"; to: Colors.accent; duration: Metrics.animationLength }
+    ColorAnimation { target: root; property: "color"; to: Colors.surface; duration: Metrics.animationLength }
+  }
+
+  MouseArea{
+    id:mouseArea
+    anchors.fill: parent
+    hoverEnabled: true
+  }
+
+  Behavior on color {
+    ColorAnimation {duration: Metrics.animationLength}
+  }
 
   property date viewDate: new Date()
   property date today: new Date()
@@ -89,9 +106,7 @@ Rectangle {
         }
 
         MouseArea {
-          id: mouseArea
           anchors.fill: parent
-          hoverEnabled: true
           onWheel: (wheel) => {
             if (wheel.angleDelta.y > 0) { root.nextMonth() }
             if (wheel.angleDelta.y < 0) { root.prevMonth() }
@@ -99,6 +114,7 @@ Rectangle {
           onClicked: {
             viewDate.setMonth(today.getMonth())
             viewDate.setYear(today.getFullYear())
+            flash.start()
           }
         }
 

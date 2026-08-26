@@ -7,12 +7,22 @@ import "../../Config/"
 
 Rectangle{
   id: root
-  color: Colors.surface
-  border.color: Colors.border
+  color: mouseArea.containsMouse ? Colors.overlay : Colors.surface
+  border.color: mouseArea.containsMouse ? Colors.accent : Colors.border
   radius: Metrics.roundingRadius
   implicitHeight: content.height
   implicitWidth: Metrics.avBarWidthHome
   required property int length
+
+  Behavior on color {
+    ColorAnimation {duration: Metrics.animationLength}
+  }
+
+  SequentialAnimation {
+    id: flash
+    ColorAnimation { target: root; property: "color"; to: Colors.accent; duration: Metrics.animationLength }
+    ColorAnimation { target: root; property: "color"; to: Colors.surface; duration: Metrics.animationLength }
+  }
 
   property int barNumber: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / (Metrics.avBarHeightHome + Metrics.avBarSpacingHome))) // Calculated number of bars
   property int barCount: root.barNumber % 2 === 0 ? root.barNumber : root.barNumber - 1 // barCount for cava (requires even number for stereo output)
@@ -28,14 +38,13 @@ Rectangle{
   //visible: active
 
   MouseArea{
-    id: regenerateCava
+    id: mouseArea
     anchors.fill: parent
+    hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     onClicked: (mouse) => {
-      if (mouse.button == Qt.LeftButton) { killCava.running = true }
-      if (mouse.button == Qt.RightButton) {
-        killNoRegen.running = true 
-      }
+      if (mouse.button == Qt.LeftButton) { killCava.running = true , flash.start()}
+      if (mouse.button == Qt.RightButton) { killNoRegen.running = true, flash.start()}
     }
   }
 

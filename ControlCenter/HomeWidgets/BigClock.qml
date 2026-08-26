@@ -6,6 +6,12 @@ import "../../Config"
 Rectangle{
   id: root
 
+  SequentialAnimation {
+    id: flash
+    ColorAnimation { target: root; property: "color"; to: Colors.accent; duration: Metrics.animationLength }
+    ColorAnimation { target: root; property: "color"; to: Colors.surface; duration: Metrics.animationLength }
+  }
+
   required property int spanH
   required property int spanW
   implicitWidth: Functions.spanToWidth(spanW)
@@ -104,9 +110,9 @@ Rectangle{
     anchors.fill: parent
     acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
     onClicked: (mouse)=>{
-      if (mouse.button == Qt.LeftButton) {isStopwatch ?  root.toggleRunning() : isStopwatch = true}
-      if (mouse.button == Qt.MiddleButton) { isStopwatch = !isStopwatch }
-      if (mouse.button == Qt.RightButton) {root.isRunning ? root.toggleLap() : root.reset()}
+      if (mouse.button == Qt.LeftButton) {isStopwatch ?  root.toggleRunning() : (isStopwatch = true, root.toggleRunning()), flash.start()}
+      if (mouse.button == Qt.MiddleButton) { isStopwatch = !isStopwatch , flash.start()}
+      if (mouse.button == Qt.RightButton) {root.isRunning ? root.toggleLap() : root.reset(), flash.start()}
     }
   }
 
