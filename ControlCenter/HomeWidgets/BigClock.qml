@@ -5,10 +5,14 @@ import "../../Config"
 
 Rectangle{
   id: root
+
+  required property int spanH
+  required property int spanW
+  implicitWidth: Functions.spanToWidth(spanW)
+  implicitHeight: Functions.spanToHeight(spanH)
+
   color: mouseArea.containsMouse ? Colors.overlay : Colors.surface
   border.color: isRunning ? Colors.success : mouseArea.containsMouse ? Colors.accent : Colors.border
-  implicitHeight: Metrics.buttonHeight * 2
-  implicitWidth: Metrics.buttonWidth
   radius: Metrics.roundingRadius
 
   SystemClock { id: clock; precision: SystemClock.Seconds }

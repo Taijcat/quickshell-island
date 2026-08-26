@@ -11,7 +11,8 @@ import "../../Config/"
 RowLayout{
   id: root
   Layout.fillWidth: true
-  required property int length
+  required property int lengthPre
+  property int length : lengthPre - 112
   spacing: Metrics.spacingInMenu
 
   readonly property var player: {

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid Painter</title>
+<style>
+  :root {
+    --bg: #17181c;
+    --panel: #1f2126;
+    --border: #2c2f36;
+    --text: #e7e8ea;
+    --muted: #8b8f99;
+    --accent: #5b8cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 60px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toolbar label {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .toolbar input[type="number"] {
+    width: 52px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 13px;
+  }
+  .swatches {
+    display: flex;
+    gap: 6px;
+  }
+  .swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 0;
+  }
+  .swatch.active {
+    border-color: var(--text);
+  }
+  .eraser {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .eraser.active {
+    border-color: var(--text);
+    color: var(--text);
+  }
+  button.action {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  button.action:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  #grid {
+    display: grid;
+    border: 1px solid var(--border);
+    background: var(--border);
+    gap: 1px;
+    user-select: none;
+  }
+  .cell {
+    background: var(--panel);
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+  }
+  .hint {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<h1>Grid Painter</h1>
+
+<div class="toolbar">
+  <label>Cols <input type="number" id="cols" value="12" min="1" max="60"></label>
+  <label>Rows <input type="number" id="rows" value="8" min="1" max="60"></label>
+  <label>Size <input type="number" id="cellSize" value="32" min="8" max="80"></label>
+  <div class="swatches" id="swatches"></div>
+  <div class="eraser active" id="eraser" title="Eraser">×</div>
+  <button class="action" id="clearBtn">Clear</button>
+</div>
+
+<div id="grid"></div>
+<div class="hint">Click and drag to paint. Click a color to select it, click the eraser to clear cells.</div>
+
+<script>
+const colors = ["#5b8cff", "#ff6b6b", "#51cf66", "#ffd43b", "#cc5de8", "#22b8cf", "#ff922b", "#e7e8ea"];
+let currentColor = null; // null = eraser
+let painting = false;
+let paintValue = null; // color being applied during this drag
+
+const grid = document.getElementById('grid');
+const colsInput = document.getElementById('cols');
+const rowsInput = document.getElementById('rows');
+const sizeInput = document.getElementById('cellSize');
+const swatchesEl = document.getElementById('swatches');
+const eraserEl = document.getElementById('eraser');
+const clearBtn = document.getElementById('clearBtn');
+
+function buildSwatches() {
+  swatchesEl.innerHTML = '';
+  colors.forEach((c, i) => {
+    const s = document.createElement('button');
+    s.className = 'swatch';
+    s.style.background = c;
+    s.title = c;
+    s.addEventListener('click', () => {
+      currentColor = c;
+      updateActiveSwatch();
+    });
+    swatchesEl.appendChild(s);
+  });
+}
+
+function updateActiveSwatch() {
+  [...swatchesEl.children].forEach(s => {
+    s.classList.toggle('active', s.style.background === hexToRgb(currentColor));
+  });
+  eraserEl.classList.toggle('active', currentColor === null);
+}
+
+function hexToRgb(hex) {
+  if (!hex) return '';
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255, g = (bigint >> 8) & 255, b = bigint & 255;
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+eraserEl.addEventListener('click', () => {
+  currentColor = null;
+  updateActiveSwatch();
+});
+
+function buildGrid() {
+  const cols = parseInt(colsInput.value) || 12;
+  const rows = parseInt(rowsInput.value) || 8;
+  const size = parseInt(sizeInput.value) || 32;
+
+  grid.innerHTML = '';
+  grid.style.gridTemplateColumns = `repeat(${cols}, ${size}px)`;
+  grid.style.gridTemplateRows = `repeat(${rows}, ${size}px)`;
+
+  for (let i = 0; i < cols * rows; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.addEventListener('mousedown', (e) => {
+      painting = true;
+      paintValue = currentColor;
+      applyPaint(cell);
+      e.preventDefault();
+    });
+    cell.addEventListener('mouseenter', () => {
+      if (painting) applyPaint(cell);
+    });
+    grid.appendChild(cell);
+  }
+}
+
+function applyPaint(cell) {
+  cell.style.background = paintValue || '';
+  if (!paintValue) cell.style.removeProperty('background');
+}
+
+document.addEventListener('mouseup', () => { painting = false; });
+
+[colsInput, rowsInput, sizeInput].forEach(el => el.addEventListener('change', buildGrid));
+clearBtn.addEventListener('click', buildGrid);
+
+buildSwatches();
+currentColor = colors[0];
+updateActiveSwatch();
+buildGrid();
+</script>
+
+</body>
+</html>

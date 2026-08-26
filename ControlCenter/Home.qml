@@ -15,7 +15,7 @@ Item {
 
   readonly property var thisMonitor: Hyprland.monitorFor(parentWindow.screen)
   readonly property bool isActiveHere: IslandState.activeModule === IslandTypes.Module.Home
-                                        && thisMonitor === Hyprland.focusedMonitor
+  && thisMonitor === Hyprland.focusedMonitor
 
   visible: isActiveHere
   focus: isActiveHere
@@ -24,30 +24,43 @@ Item {
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
-
-  RowLayout{
+  ColumnLayout{
     id: main
     anchors.centerIn: parent
-    spacing: Metrics.spacingInMenu * 2
-    ColumnLayout{
+    spacing: Metrics.spacingInMenu
+    RowLayout{
       id: content
       spacing: Metrics.spacingInMenu
-      Media {length: buttons.width}
-      ColumnLayout{
-        id: buttons
-        RowLayout{
-          spacing: Metrics.spacingInMenu
-          Ethernet {}
-          Wifi {}
-          Bluetooth {}
+      Visualizer {length: content.height}
+      GridLayout {
+        id: grid
+        columns: 4
+        rowSpacing: Metrics.spacingInMenu
+        columnSpacing: Metrics.spacingInMenu
+
+        Ethernet  { Layout.column: 0; Layout.row: 0 }
+        Wifi      { Layout.column: 1; Layout.row: 0 }
+        Bluetooth { Layout.column: 2; Layout.row: 0 }
+        Caffeine  { Layout.column: 3; Layout.row: 0 }
+        Button    { Layout.column: 3; Layout.row: 1 }
+        Button    { Layout.column: 3; Layout.row: 2 }
+
+        BigClock{
+          Layout.column: 3; Layout.row: 3
+          Layout.columnSpan: 1; Layout.rowSpan: 2
+          spanW: 1; spanH: 2
         }
-       // Calendar {length: buttons.width}
-        //BigClock {}
-        Calendar {length: buttons.width}
+
+        Calendar{
+          Layout.column: 0; Layout.row: 1
+          Layout.columnSpan: 3; Layout.rowSpan: 4
+          spanW: 3; spanH: 4
+        }
       }
-      VolumeSlider {length: content.width}
+      Media {id: media; lengthPre: content.height} // Base length = 112
+      //Text{text: media.height; color:"#FFFFFF"}
     }
-    Visualizer {length: content.height}
+    VolumeSlider {length: main.width}
   }
 
 
