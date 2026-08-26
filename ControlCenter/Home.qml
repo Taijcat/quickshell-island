@@ -42,6 +42,7 @@ Item {
           Bluetooth {}
         }
        // Calendar {length: buttons.width}
+        BigClock {}
       }
       VolumeSlider {length: content.width}
     }
