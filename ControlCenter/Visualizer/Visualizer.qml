@@ -14,7 +14,7 @@ Rectangle{
   implicitWidth: Metrics.avBarWidthHome
   required property int length
 
-  property int barNumber: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / 4)) // Calculated number of bars
+  property int barNumber: Math.max(0, Math.floor((length - Metrics.edgePadding * 2) / (Metrics.avBarHeightHome + Metrics.avBarSpacingHome))) // Calculated number of bars
   property int barCount: root.barNumber % 2 === 0 ? root.barNumber : root.barNumber - 1 // barCount for cava (requires even number for stereo output)
 
   property var barValues: Array(root.barCount).fill(0)
