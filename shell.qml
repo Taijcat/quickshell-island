@@ -52,7 +52,7 @@ ShellRoot {
       anchors.top: true
       anchors.left: true
       anchors.right: true
-      implicitHeight: 600
+      implicitHeight: modelData.height
       color: "transparent"
 
       // Make root not steal clicks from the screen
@@ -79,11 +79,21 @@ ShellRoot {
         }
 
         Behavior on implicitWidth {
-          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
+          NumberAnimation {
+            duration: Metrics.animationLength
+            easing.type: Easing.OutBack
+            easing.overshoot: Metrics.easingHeadroom
+          }
         }
+
         Behavior on implicitHeight {
-          NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.InOutQuad }
+          NumberAnimation {
+            duration: Metrics.animationLength
+            easing.type: Easing.OutBack
+            easing.overshoot: Metrics.easingHeadroom
+          }
         }
+
         RowLayout {
           id: content
           anchors.centerIn: parent

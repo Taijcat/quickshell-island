@@ -15,6 +15,7 @@ Rectangle{
   antialiasing: true
   color: "transparent"
 
+  signal clicked()
 
   // Audio logic
   property var sink: Pipewire.defaultAudioSink
@@ -91,8 +92,10 @@ Rectangle{
       MouseArea{
         id: muteArea
         anchors.fill: parent
-        onClicked: {
-          sink.audio.muted = !sink.audio.muted
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: (mouse) => {
+          if (mouse.button == Qt.RightButton) { sink.audio.muted = !sink.audio.muted }
+          if (mouse.button == Qt.LeftButton) { root.clicked() }
         }
       }
     }

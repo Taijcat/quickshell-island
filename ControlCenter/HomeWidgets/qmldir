@@ -1,6 +1,5 @@
 # ControlCenter/HomeWidgets/qmldir
 module ControlCenter.HomeWidgets
-Button 1.0 Button.qml
 Ethernet 1.0 Ethernet.qml
 Wifi 1.0 Wifi.qml
 Bluetooth 1.0 Bluetooth.qml
@@ -11,3 +10,4 @@ PowerMenu 1.0 PowerMenu.qml
 Calendar 1.0 Calendar.qml
 BigClock 1.0 BigClock.qml
 UsageBars 1.0 UsageBars.qml
+SinkMenu 1.0 SinkMenu.qml

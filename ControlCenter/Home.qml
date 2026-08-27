@@ -7,6 +7,7 @@ import "../Config/"
 import "HomeWidgets"
 import "../Island"
 import "Visualizer"
+import "Examples"
 
 
 Item {
@@ -23,6 +24,7 @@ Item {
 
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
+
 
   ColumnLayout{
     id: main
@@ -64,13 +66,57 @@ Item {
       Media {id: media; lengthPre: content.height} // Base length = 112
       //Text{text: media.height; color:"#FFFFFF"}
     }
-    VolumeSlider {length: main.width}
+    VolumeSlider {id: volumeSlider; length: main.width}
+  }
+  Item {
+    SinkMenu {
+      target: volumeSlider; anchorWindow: root.parentWindow
+    }
   }
 
+  /*
+   ColumnLayout{
+     id: main
+     anchors.centerIn: parent
+     spacing: 0
+     Rectangle{
+       color: Colors.surface
+       radius: Metrics.roundingRadius
+       border.color: Colors.border
+       implicitWidth: text.width + Metrics. edgePadding
+       implicitHeight: text.height + Metrics.edgePadding
+       Text{
+         anchors.centerIn: parent
+         id: text
+         text: "Click me ;3"
+         color: Colors.text
+         font {
+           family: Metrics.textFont
+           pixelSize: Metrics.textSize
+         }
+       }
+       MouseArea{
+         anchors.fill: parent
+         onClicked:{
+           debugPopUp.menuOpen = !debugPopUp.menuOpen
+         }
+       }
+       Item{
+         DebugPopUp {
+           id: debugPopUp; anchorWindow: root.parentWindow
+           model: ["1", "2", "3"]
+         }
+       }
+     }
+     */
 
-  HyprlandFocusGrab {
-    windows: [root.parentWindow]
-    active: isActiveHere
-    onCleared: IslandState.show(IslandTypes.Module.Clock)
+
+
+
+
+    HyprlandFocusGrab {
+      windows: [root.parentWindow]
+      active: isActiveHere
+      onCleared: IslandState.show(IslandTypes.Module.Clock)
+    }
   }
-}

@@ -11,7 +11,7 @@ RowLayout {
 
   Timer {
     id: workspaceTimer
-    interval: 500
+    interval: Metrics.animationLength * 1.5
     onTriggered: IslandState.restore()
   }
 

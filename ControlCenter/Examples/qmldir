@@ -1,0 +1,4 @@
+# ControlCenter/Examples
+module Examples
+DebugButton 1.0 DebugButton.qml
+DebugPopUp 1.0 DebugPopUp.qml

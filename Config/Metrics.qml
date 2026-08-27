@@ -7,7 +7,6 @@ QtObject {
   // Decorations
   readonly property int islandVertPadding: 6
   readonly property int islandHorizPadding: 14
-  readonly property int animationLength: 150
   readonly property int borderWidth: 150
   readonly property int spacingInMenu: 5
   readonly property int buttonHeight: 56
@@ -15,6 +14,7 @@ QtObject {
   readonly property int buttonPadding: 3
   readonly property int edgePadding: 8
   readonly property int osdWidth: 150
+  readonly property int popUpMenuWidth: 260
 
   property int islandHeight: 0
   property real roundingRadius: islandHeight / 2 // Half the height of the island when only the clock is active
@@ -38,5 +38,10 @@ QtObject {
   readonly property int waveAmp: 3
   readonly property int waveLength: 25
   readonly property int waveSpeed: 1200
+
+  // Animations
+  readonly property int animationLength: 300
+  readonly property real easingHeadroom: 1.15
+
 
 }
