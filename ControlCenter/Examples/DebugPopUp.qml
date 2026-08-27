@@ -42,6 +42,7 @@ PopupWindow{
     Behavior on scale {
       NumberAnimation {
         duration: Metrics.animationLength
+        anchors.fill: parent
         easing.type: Easing.OutBack
         easing.overshoot: Metrics.easingHeadroom
       }
@@ -49,7 +50,6 @@ PopupWindow{
 
     ColumnLayout {
       id: listCol
-      anchors.fill: parent
       anchors.margins: Metrics.edgePadding
       spacing: Metrics.spacingInMenu
 

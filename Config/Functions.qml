@@ -1,6 +1,5 @@
 pragma Singleton
 import QtQuick
-import "Config"
 
 QtObject{
   function spanToHeight(spanH) {

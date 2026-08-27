@@ -1,5 +1,7 @@
 import Quickshell
 import Quickshell.Io
+import QtQuick.Controls
+import QtQuick.Controls.Material
 import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
@@ -79,6 +81,22 @@ PopupWindow{
       anchors.fill: parent
       anchors.margins: Metrics.edgePadding
       spacing: Metrics.spacingInMenu
+
+      RowLayout{
+        Layout.margins: 0
+        spacing: 0
+        Text {
+          text: "Default sink"
+          color: Colors.text
+          font {
+            family: Metrics.textFont
+            pixelSize: Metrics.textSize * Metrics.textSizeMult
+            weight: 500
+          }
+        }
+        Item{Layout.fillWidth: true}
+      }
+      Rectangle{height: 1; color: Colors.textDim; implicitWidth: parent.width; Layout.alignment: Qt.AlignHCenter; radius: 1; antialiasing: true}
 
       Repeater {
         model: audioSinks

@@ -15,6 +15,7 @@ QtObject {
   readonly property int edgePadding: 8
   readonly property int osdWidth: 150
   readonly property int popUpMenuWidth: 260
+  readonly property int switchLength: 44
 
   property int islandHeight: 0
   property real roundingRadius: islandHeight / 2 // Half the height of the island when only the clock is active
@@ -28,7 +29,6 @@ QtObject {
   readonly property real iconSizeMult: 1.25
   readonly property real textSizeMult: 1.25
   readonly property int fontBold: 600
-
 
   // Config
   readonly property string terminal: "kitty"

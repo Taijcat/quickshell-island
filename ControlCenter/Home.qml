@@ -74,49 +74,10 @@ Item {
     }
   }
 
-  /*
-   ColumnLayout{
-     id: main
-     anchors.centerIn: parent
-     spacing: 0
-     Rectangle{
-       color: Colors.surface
-       radius: Metrics.roundingRadius
-       border.color: Colors.border
-       implicitWidth: text.width + Metrics. edgePadding
-       implicitHeight: text.height + Metrics.edgePadding
-       Text{
-         anchors.centerIn: parent
-         id: text
-         text: "Click me ;3"
-         color: Colors.text
-         font {
-           family: Metrics.textFont
-           pixelSize: Metrics.textSize
-         }
-       }
-       MouseArea{
-         anchors.fill: parent
-         onClicked:{
-           debugPopUp.menuOpen = !debugPopUp.menuOpen
-         }
-       }
-       Item{
-         DebugPopUp {
-           id: debugPopUp; anchorWindow: root.parentWindow
-           model: ["1", "2", "3"]
-         }
-       }
-     }
-     */
 
-
-
-
-
-    HyprlandFocusGrab {
-      windows: [root.parentWindow]
-      active: isActiveHere
-      onCleared: IslandState.show(IslandTypes.Module.Clock)
-    }
+  HyprlandFocusGrab {
+    windows: [root.parentWindow]
+    active: isActiveHere
+    onCleared: IslandState.show(IslandTypes.Module.Clock)
   }
+}
