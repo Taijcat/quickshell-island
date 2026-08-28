@@ -12,16 +12,30 @@ RowLayout{
   id: root
   Layout.fillWidth: true
   required property int lengthPre
+  property int preferredIndex: 0
   property int length : lengthPre - 112
   spacing: Metrics.spacingInMenu
 
+  /*
   readonly property var player: {
     const players = Mpris.players.values
     if (players.length === 0) return null
-    return players.find(p => p.playbackState === MprisPlaybackState.Playing) ?? players[0]
+    return players.find(p => p.playbackState === MprisPlaybackState.Playing) ?? players[preferredIndex]
   }
+  */
+
+ readonly property var player: {
+   const players = Mpris.players.values
+   if (players.length === 0) return null
+   return players[preferredIndex]
+ }
+
+
   readonly property bool active: player !== null
   readonly property bool playing: active && player.playbackState === MprisPlaybackState.Playing
+
+  signal clicked()
+
   //visible: active
 
 component MediaSlider: Item {
@@ -34,12 +48,12 @@ component MediaSlider: Item {
   signal seekRequested(real position)
   signal seekStarted()
   signal seekFinished()
+  property real waveLength: Metrics.waveLength
   readonly property real ratio: length > 0 ? position / length : 0
   property real waveAmplitude: (root.active && root.playing && !slider.seeking) ? Metrics.waveAmp : 0
   Behavior on waveAmplitude {
     NumberAnimation { duration: Metrics.animationLength; easing.type: Easing.OutQuad }
   }
-  property real waveLength: Metrics.waveLength
   property real phase: 0
   NumberAnimation on phase {
     running: root.playing && !slider.seeking
@@ -252,7 +266,13 @@ component MediaSlider: Item {
           color: "transparent"
           //radius: Metrics.roundingRadius
           radius: height/2
-          border.color: Colors.border
+          border.color: mouse.containsMouse ? Colors.accent : Colors.border
+          MouseArea{
+            id: mouse
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: root.clicked()
+          }
         }
       }
 

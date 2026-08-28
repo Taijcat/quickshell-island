@@ -63,16 +63,15 @@ Item {
           spanW: 3; spanH: 4
         }
       }
-      Media {id: media; lengthPre: content.height} // Base length = 112
+      Media {id: media; lengthPre: content.height; preferredIndex: playerMenu.preferredIndex} // Base length = 112
       //Text{text: media.height; color:"#FFFFFF"}
     }
-    VolumeSlider {id: volumeSlider; length: main.width}
+    VolumeSlider {id: volumeSlider; length: main.width;}
   }
-  Item {
-    SinkMenu {
-      target: volumeSlider; anchorWindow: root.parentWindow
-    }
-  }
+
+  // Menus
+  SinkMenu { target: volumeSlider; anchorWindow: root.parentWindow }
+  PlayerMenu { id: playerMenu; target: media; anchorWindow: root.parentWindow }
 
 
   HyprlandFocusGrab {
