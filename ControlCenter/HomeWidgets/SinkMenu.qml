@@ -65,7 +65,7 @@ PopupWindow{
     radius: Metrics.roundingRadius
 
     implicitHeight: listCol.implicitHeight + 2 * Metrics.edgePadding
-    implicitWidth: Metrics.popUpMenuWidth
+    implicitWidth: Metrics.popUpMenuWidth * 1.5
 
     scale: root.menuOpen ? 1.0 : 0.4
     Behavior on scale {
@@ -82,21 +82,17 @@ PopupWindow{
       anchors.margins: Metrics.edgePadding
       spacing: Metrics.spacingInMenu
 
-      RowLayout{
-        Layout.margins: 0
-        spacing: 0
-        Text {
-          text: "Default sink"
-          color: Colors.text
-          font {
-            family: Metrics.textFont
-            pixelSize: Metrics.textSize * Metrics.textSizeMult
-            weight: 500
-          }
+      Text {
+        text: "Available sinks"
+        color: Colors.text
+        font {
+          family: Metrics.textFont
+          pixelSize: Metrics.textSize * Metrics.textSizeMult
+          weight: 500
         }
-        Item{Layout.fillWidth: true}
       }
       Rectangle{height: 1; color: Colors.textDim; implicitWidth: parent.width; Layout.alignment: Qt.AlignHCenter; radius: 1; antialiasing: true}
+      Item {}
 
       Repeater {
         model: audioSinks
@@ -114,14 +110,14 @@ PopupWindow{
 
           Text{
             id: text
-            text: modelData.description
+            text: (isDefault ? String.fromCodePoint(0xf0c52) : String.fromCodePoint(0xf0131)) + "   " + (modelData.description)
             color: itemRect.isDefault ? Colors.base : Colors.text
             anchors.centerIn: parent
             width: itemRect.width - 2 * Metrics.edgePadding
             wrapMode: Text.WordWrap
             font {
               family: Metrics.textFont
-              pixelSize: Metrics.textSize * Metrics.textSizeMult
+              pixelSize: Metrics.textSize
               weight: itemRect.isDefault ? 500 : 400
             }
           }
@@ -131,7 +127,6 @@ PopupWindow{
             hoverEnabled: true
             onClicked: Pipewire.preferredDefaultAudioSink = modelData
           }
-
           Behavior on color { ColorAnimation { duration: Metrics.animationLength } }
         }
       }
