@@ -10,19 +10,19 @@ RowLayout {
   Layout.preferredWidth: Functions.spanToWidth(spanW)
 
   property var buttons: [
-    buttonComponent.createObject(root, { icon: 0xf033e, onClicked: () => console.log("lock"), isActive: false, activeColor: Colors.accent }),
-    buttonComponent.createObject(root, { icon: 0xf0343, onClicked: () => console.log("log out"), isActive: false, activeColor: Colors.hint }),
-    buttonComponent.createObject(root, { icon: 0xf03e4, onClicked: () => console.log("suspend"), isActive: false, activeColor: Colors.info }),
-    buttonComponent.createObject(root, { icon: 0xf0709, onClicked: () => console.log("restart"), isActive: false, activeColor: Colors.success }),
-    buttonComponent.createObject(root, { icon: 0xf0425, onClicked: () => console.log("power"), isActive: false, activeColor: Colors.error }),
+    buttonComponent.createObject(root, { icon: 0xf033e, onClicked: () => Quickshell.execDetached(["loginctl", "lock-session"]), isActive: false, activeColor: Colors.accent }),
+    buttonComponent.createObject(root, { icon: 0xf0343, onClicked: () => Quickshell.execDetached(["hyprctl", "dispatch", "exit"]), isActive: false, activeColor: Colors.hint }),
+    buttonComponent.createObject(root, { icon: 0xf03e4, onClicked: () => Quickshell.execDetached(["systemctl", "suspend"]), isActive: false, activeColor: Colors.info }),
+    buttonComponent.createObject(root, { icon: 0xf0709, onClicked: () => Quickshell.execDetached(["systemctl", "reboot"]), isActive: false, activeColor: Colors.success }),
+    buttonComponent.createObject(root, { icon: 0xf0425, onClicked: () => Quickshell.execDetached(["systemctl", "poweroff"]), isActive: false, activeColor: Colors.error }),
   ]
 
   Component {
     id: buttonComponent
-    QtObject {
-      property int icon
-      property var onClicked
-      property bool isActive
+  QtObject {
+    property int icon
+    property var onClicked
+    property bool isActive
       property color activeColor
     }
   }

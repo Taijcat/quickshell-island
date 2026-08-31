@@ -50,15 +50,15 @@ RowLayout{
       color: root.color
       radius: height/2
       width: parent.width * level
-      Rectangle{
-        id: handle
-        anchors.verticalCenter: parent.verticalCenter
-        implicitHeight: Metrics.textSize
-        implicitWidth: Metrics.textSize
-        radius: height / 2
-        color: Colors.text
-        x: parent.width * level - width / 2
-      }
+
+    }
+    Rectangle{
+      anchors.verticalCenter: parent.verticalCenter
+      implicitHeight: Metrics.textSize
+      implicitWidth: Metrics.textSize
+      radius: height / 2
+      color: Colors.text
+      x: parent.width * level - width / 2
     }
   }
 
