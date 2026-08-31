@@ -7,6 +7,7 @@ QtObject {
     Clock,
     Home,
     Workspaces,
-    VolumeOSD
+    VolumeOSD,
+    System
   }
 }

@@ -101,7 +101,8 @@ ShellRoot {
           Clock {}
           Workspaces {}
           ControlCenterHome { parentWindow: root }
-          VolumeOSD{}
+          VolumeOSD {}
+          ControlCenterSystem {parentWindow: root}
         }
       }
     }

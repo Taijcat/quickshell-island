@@ -1,0 +1,3 @@
+# ControlCenter/SystemWidgets/qmldir
+module SystemWidgets
+PowerPicker 1.0 PowerPicker.qml
