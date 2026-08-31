@@ -1,3 +1,5 @@
 # ControlCenter/SystemWidgets/qmldir
 module SystemWidgets
 PowerPicker 1.0 PowerPicker.qml
+Logo 1.0 Logo.qml
+BatteryBar 1.0 BatteryBar.qml

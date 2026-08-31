@@ -6,15 +6,15 @@ import "../../Config"
 RowLayout {
   id: root
   spacing: 0
-  required property int length
-  implicitWidth: length
+  required property int spanW
+  Layout.preferredWidth: Functions.spanToWidth(spanW)
 
   property var buttons: [
-    buttonComponent.createObject(root, { icon: 0xf0425, onClicked: () => console.log("power"), isActive: false, activeColor: Colors.error }),
-    buttonComponent.createObject(root, { icon: 0xf0709, onClicked: () => console.log("restart"), isActive: false, activeColor: Colors.success }),
-    buttonComponent.createObject(root, { icon: 0xf03e4, onClicked: () => console.log("pause"), isActive: false, activeColor: Colors.info }),
+    buttonComponent.createObject(root, { icon: 0xf033e, onClicked: () => console.log("lock"), isActive: false, activeColor: Colors.accent }),
     buttonComponent.createObject(root, { icon: 0xf0343, onClicked: () => console.log("log out"), isActive: false, activeColor: Colors.hint }),
-    buttonComponent.createObject(root, { icon: 0xf033e, onClicked: () => console.log("lock"), isActive: false, activeColor: Colors.accent })
+    buttonComponent.createObject(root, { icon: 0xf03e4, onClicked: () => console.log("suspend"), isActive: false, activeColor: Colors.info }),
+    buttonComponent.createObject(root, { icon: 0xf0709, onClicked: () => console.log("restart"), isActive: false, activeColor: Colors.success }),
+    buttonComponent.createObject(root, { icon: 0xf0425, onClicked: () => console.log("power"), isActive: false, activeColor: Colors.error }),
   ]
 
   Component {

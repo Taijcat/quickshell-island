@@ -12,7 +12,7 @@ ColumnLayout {
 
   property var buttons: [
     { icon: 0xf02dc, onClicked: () => IslandState.show(IslandTypes.Module.Home),   isActive: IslandState.activeModule === IslandTypes.Module.Home   },
-    { icon: 0xf0493, onClicked: () => IslandState.show(IslandTypes.Module.System), isActive: IslandState.activeModule === IslandTypes.Module.System }
+    { icon: 0xf0493, onClicked: () => IslandState.show(IslandTypes.Module.System), isActive: IslandState.activeModule === IslandTypes.Module.System },
   ]
 
   component ComponentButton: Rectangle {

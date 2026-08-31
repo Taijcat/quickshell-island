@@ -16,7 +16,7 @@ QtObject {
   readonly property int osdWidth: 150
   readonly property int popUpMenuWidth: 260
   readonly property int switchLength: 44
-  readonly property int spacerWidth: 2
+  readonly property int spacerWidth: 1
 
   property int islandHeight: 0
   property real roundingRadius: islandHeight / 2 // Half the height of the island when only the clock is active

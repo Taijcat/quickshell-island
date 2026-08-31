@@ -158,7 +158,7 @@ Rectangle{
       text: vol + "%"
       color: root.muted ? Colors.error : Colors.text
       font {
-        family: "JetBrainsMono Nerd Font Propo"
+        family: Metrics.textFont
         pixelSize: Metrics.textSize
       }
     }

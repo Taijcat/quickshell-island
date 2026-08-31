@@ -36,20 +36,24 @@ Item {
       color: Colors.border
       radius: implicitWidth / 2
     }
-    DebugButton{}
     ColumnLayout{
-      PowerPicker{length: buttons.width}
+      RowLayout{
+        Item {Layout.preferredWidth: Functions.spanToWidth(content.columns - powerPicker.spanW)}
+        PowerPicker{id: powerPicker; spanW: 3}
+      }
       GridLayout{
-        id: buttons
-        columns: 3
+        id: content
+        columns: 5
         rowSpacing: Metrics.spacingInMenu
         columnSpacing: Metrics.spacingInMenu
         DebugButton {}
         DebugButton {}
-        DebugButton {}
-        DebugButton {}
-        DebugButton {}
+        Logo{
+          Layout.column: 2; Layout.row: 0
+          Layout.columnSpan: 3; Layout.rowSpan: 3
+        }
       }
+      BatteryBar {Layout.fillWidth: true}
     }
 
   }
