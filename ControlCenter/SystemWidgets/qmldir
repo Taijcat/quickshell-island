@@ -3,3 +3,5 @@ module SystemWidgets
 PowerPicker 1.0 PowerPicker.qml
 Logo 1.0 Logo.qml
 BatteryBar 1.0 BatteryBar.qml
+CPUInfo 1.0 CPUInfo.qml
+GPUInfo 1.0 GPUInfo.qml

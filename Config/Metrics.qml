@@ -24,6 +24,7 @@ QtObject {
 
   // Fonts
   readonly property string textFont: "Google Sans Flex"
+  readonly property string numberFont: "Google Sans Code"
   readonly property string iconFont: "JetBrainsMono Nerd Font Propo"
   readonly property int iconSize: 25
   readonly property int textSize: 15
@@ -40,6 +41,10 @@ QtObject {
   readonly property int avBarSpacingHome: 3
   readonly property int avBarHeightHome: 5
   readonly property int avBarWidthHome: 100
+
+  readonly property int usageBarSpacingSystem: 3
+  readonly property int usageBarWidthSystem: 5
+
   readonly property int waveAmp: 3
   readonly property int waveLength: 25
   readonly property int waveSpeed: 1200

@@ -63,16 +63,26 @@ Item {
       }
       GridLayout{
         id: content
-        columns: 5
+        columns: 9
         rowSpacing: Metrics.spacingInMenu
         columnSpacing: Metrics.spacingInMenu
-        DebugButton {}
-        DebugButton {}
+        CPUInfo {
+          Layout.column: 0; Layout.row: 0
+          Layout.columnSpan: 6; Layout.rowSpan: 2
+          spanW: 6; spanH: 2
+        }
+        GPUInfo {
+          Layout.column: 0; Layout.row: 2
+          Layout.columnSpan: 6; Layout.rowSpan: 2
+          spanW: 6; spanH: 2
+        }
         Logo{
-          Layout.column: 2; Layout.row: 0
+          Layout.column: content.columns - 3; Layout.row: 0
           Layout.columnSpan: 3; Layout.rowSpan: 3
         }
-
+        DebugButton {Layout.column: content.columns - 3; Layout.row: 3}
+        DebugButton {Layout.column: content.columns - 2; Layout.row: 3}
+        DebugButton {Layout.column: content.columns - 1; Layout.row: 3}
       }
       BatteryBar {Layout.fillWidth: true}
     }

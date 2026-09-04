@@ -5,7 +5,7 @@ import "../../Config"
 Rectangle{
   id: root
   property int span: 3
-  implicitHeight: Functions.spanToWidth(span)
+  implicitHeight: Functions.spanToHeight(span)
   implicitWidth: Functions.spanToWidth(span)
   color: Colors.surface
   radius: Metrics.roundingRadius
