@@ -19,7 +19,27 @@ Item {
 
   visible: isActiveHere
   focus: isActiveHere
-  Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
+
+  Shortcut {
+    sequence: "Escape"
+    enabled: root.visible
+    onActivated:{
+      IslandState.show(IslandTypes.Module.Clock)
+    }
+  }
+
+  Shortcut {
+    sequences: ["J", "Down"]
+    enabled: root.visible
+    onActivated: picker.tabDown()
+  }
+
+  Shortcut {
+    sequences: ["K", "Up"]
+    enabled: root.visible
+    onActivated: picker.tabUp()
+  }
+
 
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
@@ -29,7 +49,7 @@ Item {
     id: main
     anchors.centerIn: parent
     spacing: Metrics.spacingInMenu
-    ControlCenterPicker {length: main.height}
+    ControlCenterPicker {id:picker; length: main.height}
     Rectangle{
       implicitWidth: Metrics.spacerWidth
       Layout.fillHeight: true
@@ -43,18 +63,16 @@ Item {
       }
       GridLayout{
         id: content
-        columns: 7
+        columns: 5
         rowSpacing: Metrics.spacingInMenu
         columnSpacing: Metrics.spacingInMenu
-        SystemInfo {
-          Layout.column: 0; Layout.row: 0
-          Layout.columnSpan: 4; Layout.rowSpan: 3
-          spanW: 4; spanH: 3
-        }
+        DebugButton {}
+        DebugButton {}
         Logo{
-          Layout.column: 5; Layout.row: 0
+          Layout.column: 2; Layout.row: 0
           Layout.columnSpan: 3; Layout.rowSpan: 3
         }
+
       }
       BatteryBar {Layout.fillWidth: true}
     }

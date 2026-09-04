@@ -30,6 +30,18 @@ Item {
     }
   }
 
+  Shortcut {
+    sequences: ["J", "Down"]
+    enabled: root.visible
+    onActivated: picker.tabDown()
+  }
+
+  Shortcut {
+    sequences: ["K", "Up"]
+    enabled: root.visible
+    onActivated: picker.tabUp()
+  }
+
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
@@ -37,7 +49,7 @@ Item {
   RowLayout{
     id: main
     anchors.centerIn: parent
-    ControlCenterPicker {length: content.height}
+    ControlCenterPicker {id: picker; length: content.height}
     Rectangle{
       implicitWidth: Metrics.spacerWidth
       Layout.fillHeight: true

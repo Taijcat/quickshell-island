@@ -8,7 +8,17 @@ ColumnLayout {
   id: root
   spacing: Metrics.spacingInMenu
   required property int length
+  property int activeTabIndex: buttons.findIndex(b => b.isActive === true)
   implicitHeight: length
+
+  function tabDown() {
+    buttons[(activeTabIndex + 1) % buttons.length].onClicked()
+  }
+
+  function tabUp() {
+    buttons[(activeTabIndex - 1 + buttons.length) % buttons.length].onClicked()
+  }
+
 
   property var buttons: [
     { icon: 0xf02dc, onClicked: () => IslandState.show(IslandTypes.Module.Home),   isActive: IslandState.activeModule === IslandTypes.Module.Home   },
