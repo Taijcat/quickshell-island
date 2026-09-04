@@ -21,7 +21,14 @@ Item {
 
   visible: isActiveHere
   focus: isActiveHere
-  Keys.onEscapePressed: IslandState.show(IslandTypes.Module.Clock)
+
+  Shortcut {
+    sequence: "Escape"
+    enabled: root.visible
+    onActivated:{
+      IslandState.show(IslandTypes.Module.Clock)
+    }
+  }
 
   implicitWidth: isActiveHere ? main.implicitWidth : 0
   implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0

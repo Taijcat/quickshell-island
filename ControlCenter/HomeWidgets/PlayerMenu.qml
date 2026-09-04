@@ -18,6 +18,8 @@ PopupWindow{
   property var target: null
   grabFocus: true
 
+
+
   property bool menuOpen: false
   visible: menuOpen
 
@@ -34,6 +36,15 @@ PopupWindow{
       root.menuOpen = true
     }
   }
+
+  Shortcut {
+  sequence: "Escape"
+  enabled: root.visible
+  onActivated: {
+    menuOpen = false
+    IslandState.show(IslandTypes.Module.Home)
+  }
+}
 
   onVisibleChanged: {
     menuOpen = visible

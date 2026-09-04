@@ -1,8 +1,5 @@
 import Quickshell
-import Quickshell.Io
-import QtQuick.Controls
-import QtQuick.Controls.Material
-import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
 import QtQuick
 import QtQuick.Layouts
 import "../../Config"
@@ -13,36 +10,21 @@ PopupWindow{
   color: "transparent"
  
   //Audio Logic
-  property var sink: Pipewire.defaultAudioSink
-  readonly property bool ready: sink && sink.ready
-
-  readonly property var audioSinks: {
-    let result = []
-    for (const node of Pipewire.nodes.values) {
-      if (node.isSink && !node.isStream && node.audio) {
-        result.push(node)
-      }
-    }
-    return result
-  }
-
-  Shortcut {
-    sequence: "Escape"
-    enabled: root.visible
-    onActivated: {
-      menuOpen = false
-      IslandState.show(IslandTypes.Module.Home)
-    }
-  }
-
-  PwObjectTracker {
-    objects: audioSinks
-  }
+  readonly property var players: Mpris.players.values
 
   // PopUp Logic
   required property var anchorWindow
+  property int preferredIndex: 0
   property var target: null
   grabFocus: true
+
+  Shortcut {
+    sequence: "Escape"
+    onActivated:{
+      menuOpen = false
+      IslandState.show( IslandTypes.Module.Home )
+    }
+  }
 
   property bool menuOpen: false
   visible: menuOpen
@@ -58,7 +40,6 @@ PopupWindow{
     target: root.target
     function onClicked() {
       root.menuOpen = true
-      //for (const s of audioSinks) { console.log(s.name, s.description) }
     }
   }
 
@@ -92,7 +73,7 @@ PopupWindow{
       spacing: Metrics.spacingInMenu
 
       Text {
-        text: "Available sinks"
+        text: "Available players"
         color: Colors.text
         font {
           family: Metrics.textFont
@@ -104,12 +85,12 @@ PopupWindow{
       Item {}
 
       Repeater {
-        model: audioSinks
+        model: players
         delegate: Rectangle {
           id: itemRect
 
           required property var modelData
-          property bool isDefault: modelData.description == sink.description
+          property bool isDefault: players.indexOf(modelData) == preferredIndex
 
           Layout.fillWidth: true
           Layout.preferredHeight: text.height + 2 * Metrics.edgePadding
@@ -119,7 +100,7 @@ PopupWindow{
 
           Text{
             id: text
-            text: (isDefault ? String.fromCodePoint(0xf0c52) : String.fromCodePoint(0xf0131)) + "   " + (modelData.description)
+            text: (isDefault ? String.fromCodePoint(0xf0c52) : String.fromCodePoint(0xf0131)) + "   " + modelData.identity + " (" + modelData.trackTitle + ")"
             color: itemRect.isDefault ? Colors.base : Colors.text
             anchors.centerIn: parent
             width: itemRect.width - 2 * Metrics.edgePadding
@@ -134,7 +115,7 @@ PopupWindow{
             id: itemMouse
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: Pipewire.preferredDefaultAudioSink = modelData
+            onClicked: preferredIndex = players.indexOf(modelData)
           }
           Behavior on color { ColorAnimation { duration: Metrics.animationLength } }
         }

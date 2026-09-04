@@ -30,6 +30,10 @@ QtObject {
   readonly property real iconSizeMult: 1.25
   readonly property real textSizeMult: 1.25
   readonly property int fontBold: 600
+ 
+  // Animations
+  readonly property int animationLength: 300
+  readonly property real easingHeadroom: 1.15
 
   // Config
   readonly property string terminal: "kitty"
@@ -40,9 +44,6 @@ QtObject {
   readonly property int waveLength: 25
   readonly property int waveSpeed: 1200
 
-  // Animations
-  readonly property int animationLength: 300
-  readonly property real easingHeadroom: 1.15
-
+  readonly property var fetchLines: [2,3,4,5,15,16,17,18,20]
 
 }

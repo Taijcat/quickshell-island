@@ -43,13 +43,16 @@ Item {
       }
       GridLayout{
         id: content
-        columns: 5
+        columns: 7
         rowSpacing: Metrics.spacingInMenu
         columnSpacing: Metrics.spacingInMenu
-        DebugButton {}
-        DebugButton {}
+        SystemInfo {
+          Layout.column: 0; Layout.row: 0
+          Layout.columnSpan: 4; Layout.rowSpan: 3
+          spanW: 4; spanH: 3
+        }
         Logo{
-          Layout.column: 2; Layout.row: 0
+          Layout.column: 5; Layout.row: 0
           Layout.columnSpan: 3; Layout.rowSpan: 3
         }
       }
