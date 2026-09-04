@@ -53,7 +53,8 @@ Item {
           Ethernet  { Layout.column: 0; Layout.row: 0 }
           Wifi      { Layout.column: 1; Layout.row: 0 }
           Bluetooth { Layout.column: 2; Layout.row: 0 }
-          Caffeine  { Layout.column: 3; Layout.row: 0 }
+          //Caffeine  { Layout.column: 3; Layout.row: 0 }
+          PowerProfile  { Layout.column: 3; Layout.row: 0 }
 
           UsageBars{
             Layout.column: 3; Layout.row: 1
