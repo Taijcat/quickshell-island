@@ -80,9 +80,11 @@ Item {
           Layout.column: content.columns - 3; Layout.row: 0
           Layout.columnSpan: 3; Layout.rowSpan: 3
         }
-        DebugButton {Layout.column: content.columns - 3; Layout.row: 3}
-        DebugButton {Layout.column: content.columns - 2; Layout.row: 3}
-        DebugButton {Layout.column: content.columns - 1; Layout.row: 3}
+        ResourcesInfo {
+          Layout.column: content.columns - 3; Layout.row: 3
+          Layout.columnSpan: 3; Layout.rowSpan: 1
+          spanW: 3; spanH:1
+        }
       }
       BatteryBar {Layout.fillWidth: true}
     }

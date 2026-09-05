@@ -25,7 +25,7 @@ Rectangle{
       onStreamFinished: {
         const val = parseFloat(text)
         if (!isNaN(val)) {
-          usageVal = val.toFixed(5) / 100
+          usageVal = parseFloat(val.toFixed(5) / 100)
           let newArr = usageArr.slice(1)
           newArr.push(usageVal)
           usageArr = newArr
