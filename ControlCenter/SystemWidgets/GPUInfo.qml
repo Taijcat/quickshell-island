@@ -19,23 +19,6 @@ Rectangle{
   color: Colors.surface
 
   Process {
-    id: cpuProc
-    command: ["sh", "-c", "top -bn1 | grep '%Cpu(s)' | awk '{print 100 - $8}'"]
-    stdout: StdioCollector {
-      onStreamFinished: {
-        const val = parseFloat(text)
-        if (!isNaN(val)) {
-          usageVal = parseFloat(val.toFixed(5) / 100)
-          let newArr = usageArr.slice(1)
-          newArr.push(usageVal)
-          usageArr = newArr
-        }
-      }
-    }
-  }
-
-  
-  Process {
     id: gpuProc
     command: ["sh", "-c",
     "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu " +
@@ -47,7 +30,7 @@ Rectangle{
           const u = parseFloat(parts[0])
           const t = parseFloat(parts[1])
           if (!isNaN(u)) {
-            usageVal = parseFloat(u.toFixed(5) / 100)
+            usageVal = parseFloat(u.toFixed(5))
             let newArr = usageArr.slice(1)
             newArr.push(usageVal)
             usageArr = newArr
@@ -70,10 +53,6 @@ Rectangle{
     }
   }
 
-  MouseArea{
-    anchors.fill: parent
-    onClicked: console.log(usageArr)
-  }
 
   RowLayout {
     id: content
@@ -92,7 +71,7 @@ Rectangle{
         model: barCount
         delegate: Rectangle{
           Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-          Layout.preferredHeight: ((root.implicitHeight - 2 * Metrics.edgePadding) * usageArr[index])
+          Layout.preferredHeight: (root.implicitHeight - 2 * Metrics.edgePadding) * Math.max(0.01,((usageArr[index]) / 100))
           Layout.preferredWidth: Metrics.usageBarWidthSystem
           radius: Layout.preferredWidth / 2
           color: Colors.green
@@ -125,7 +104,7 @@ Rectangle{
             }
           }
           Text{
-            text: " GPU: " + usageVal.toFixed(3) * 100 + ".0" + " %"
+            text: " GPU: " + (usageVal).toFixed(1) + " %"
             color: Colors.green
             font{
               family: Metrics.numberFont

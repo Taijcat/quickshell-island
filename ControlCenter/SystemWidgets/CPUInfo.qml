@@ -56,11 +56,6 @@ Rectangle{
     }
   }
 
-  MouseArea{
-    anchors.fill: parent
-    onClicked: console.log(usageArr)
-  }
-
   RowLayout {
     id: content
     anchors.left: parent.left

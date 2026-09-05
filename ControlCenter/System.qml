@@ -19,6 +19,15 @@ Item {
 
   visible: isActiveHere
   focus: isActiveHere
+  implicitWidth: isActiveHere ? main.implicitWidth : 0
+  implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
+
+  // Navigation
+  HyprlandFocusGrab {
+    windows: [root.parentWindow]
+    active: isActiveHere
+    onCleared: IslandState.show(IslandTypes.Module.Clock)
+  }
 
   Shortcut {
     sequence: "Escape"
@@ -41,10 +50,8 @@ Item {
   }
 
 
-  implicitWidth: isActiveHere ? main.implicitWidth : 0
-  implicitHeight: isActiveHere ? main.implicitHeight + Metrics.islandVertPadding * 1.5 : 0
 
-
+  // Widgets
   RowLayout{
     id: main
     anchors.centerIn: parent
@@ -89,11 +96,5 @@ Item {
       BatteryBar {Layout.fillWidth: true}
     }
 
-  }
-
-  HyprlandFocusGrab {
-    windows: [root.parentWindow]
-    active: isActiveHere
-    onCleared: IslandState.show(IslandTypes.Module.Clock)
   }
 }

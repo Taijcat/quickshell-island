@@ -53,13 +53,6 @@ Rectangle{
     }
   }
 
-  MouseArea{
-    anchors.fill: parent
-    onClicked: {
-      console.log(usageRAM + "\n" + usageDisk)
-    }
-  }
-
   ColumnLayout{
     anchors.fill: parent
     anchors.margins: Metrics.edgePadding
