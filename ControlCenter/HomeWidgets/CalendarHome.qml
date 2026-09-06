@@ -69,10 +69,7 @@ Rectangle {
     id:mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-    onClicked: (mouse) => {
-      if (mouse.button == Qt.MiddleButton) { calcurseLaunch.running = true }
-    }
+    onClicked: { calcurseLaunch.running = true }
   }
 
   Behavior on color {
