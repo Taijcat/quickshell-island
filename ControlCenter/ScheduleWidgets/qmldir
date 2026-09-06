@@ -1,0 +1,3 @@
+# ControlCenter/ScheduleWidgets/qmldir
+module SystemWidgets
+CalendarSchedule 1.0 CalendarSchedule.qml

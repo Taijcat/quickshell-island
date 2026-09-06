@@ -103,6 +103,7 @@ ShellRoot {
           ControlCenterHome { parentWindow: root }
           VolumeOSD {}
           ControlCenterSystem {parentWindow: root}
+          ControlCenterSchedule {parentWindow: root}
         }
       }
     }

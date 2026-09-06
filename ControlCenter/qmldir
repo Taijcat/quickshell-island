@@ -3,3 +3,4 @@ module ControlCenter
 ControlCenterHome 1.0 Home.qml
 ControlCenterPicker 1.0 Picker.qml
 ControlCenterSystem 1.0 System.qml
+ControlCenterSchedule 1.0 Schedule.qml

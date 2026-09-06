@@ -5,17 +5,15 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Shapes
 import "../Config/"
-import "HomeWidgets"
 import "../Island"
-import "Visualizer"
 import "Examples"
-
+import "ScheduleWidgets"
 
 Item {
   id: root
   required property var parentWindow
   readonly property var thisMonitor: Hyprland.monitorFor(parentWindow.screen)
-  readonly property bool isActiveHere: IslandState.activeModule === IslandTypes.Module.Home
+  readonly property bool isActiveHere: IslandState.activeModule === IslandTypes.Module.Schedule
   && thisMonitor === Hyprland.focusedMonitor
 
   visible: isActiveHere
@@ -51,7 +49,6 @@ Item {
     onActivated: picker.tabUp()
   }
 
-  
   // Widgets
   RowLayout{
     id: main
@@ -70,38 +67,17 @@ Item {
         spacing: Metrics.spacingInMenu
         GridLayout {
           id: grid
-          columns: 4
+          columns: 2
           rowSpacing: Metrics.spacingInMenu
           columnSpacing: Metrics.spacingInMenu
-          Ethernet  { Layout.column: 0; Layout.row: 0 }
-          Wifi      { Layout.column: 1; Layout.row: 0 }
-          Bluetooth { Layout.column: 2; Layout.row: 0 }
-          PowerProfile  { Layout.column: 3; Layout.row: 0 }
-          UsageBars{
-            Layout.column: 3; Layout.row: 1
-            Layout.columnSpan: 1; Layout.rowSpan: 2
-            spanW: 1; spanH: 2
-          }
-          BigClock{
-            Layout.column: 3; Layout.row: 3
-            Layout.columnSpan: 1; Layout.rowSpan: 2
-            spanW: 1; spanH: 2
-          }
-          CalendarHome{
-            Layout.column: 0; Layout.row: 1
-            Layout.columnSpan: 3; Layout.rowSpan: 4
-            spanW: 3; spanH: 4
-          }
+          CalendarSchedule {}
+          DebugButton{}
+          DebugButton{}
+          DebugButton{}
+          DebugButton{}
+          DebugButton{}
         }
-        Media {id: media; lengthPre: content.height; preferredIndex: playerMenu.preferredIndex} // Base length = 112
-        Visualizer {length: content.height}
-        //Text{text: media.height; color:"#FFFFFF"}
       }
-      VolumeSlider {id: volumeSlider; length: main.width;}
     }
   }
-
-  // Menus
-  SinkMenu { target: volumeSlider; anchorWindow: root.parentWindow }
-  PlayerMenu { id: playerMenu; target: media; anchorWindow: root.parentWindow }
 }

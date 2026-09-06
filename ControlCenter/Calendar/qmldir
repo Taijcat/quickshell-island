@@ -1,3 +1,0 @@
-# ControlCenter/Calendar/qmldir
-module Calendar
-CalendarHome 1.0 CalendarHome.qml

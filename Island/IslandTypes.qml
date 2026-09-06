@@ -8,6 +8,7 @@ QtObject {
     Home,
     Workspaces,
     VolumeOSD,
-    System
+    System,
+    Schedule
   }
 }

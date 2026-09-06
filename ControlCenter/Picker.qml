@@ -19,9 +19,9 @@ ColumnLayout {
     buttons[(activeTabIndex - 1 + buttons.length) % buttons.length].onClicked()
   }
 
-
   property var buttons: [
     { icon: 0xf02dc, onClicked: () => IslandState.show(IslandTypes.Module.Home),   isActive: IslandState.activeModule === IslandTypes.Module.Home   },
+    { icon: 0xf00ed, onClicked: () => IslandState.show(IslandTypes.Module.Schedule), isActive: IslandState.activeModule === IslandTypes.Module.Schedule },
     { icon: 0xf0493, onClicked: () => IslandState.show(IslandTypes.Module.System), isActive: IslandState.activeModule === IslandTypes.Module.System },
   ]
 
@@ -55,4 +55,6 @@ ColumnLayout {
   ComponentButton {buttonData: buttons[0]}
   Item {Layout.fillHeight: true}
   ComponentButton {buttonData: buttons[1]}
+  Item {Layout.fillHeight: true}
+  ComponentButton {buttonData: buttons[2]}
 }

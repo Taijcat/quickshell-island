@@ -1,4 +1,3 @@
-// Calendar/CalendarView.qml
 import QtQuick
 import QtQuick.Layouts
 import "../../Config"
