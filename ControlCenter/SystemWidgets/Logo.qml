@@ -9,6 +9,7 @@ Rectangle{
   implicitWidth: Functions.spanToWidth(span)
   color: Colors.surface
   radius: Metrics.roundingRadius
+  border.color: Colors.border
   //border.color: Colors.border
   Item {
     anchors.centerIn: parent

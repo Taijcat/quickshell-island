@@ -16,6 +16,7 @@ Rectangle{
   implicitHeight: Functions.spanToHeight(spanH)
   implicitWidth: Functions.spanToWidth(spanW)
   radius: Metrics.roundingRadius
+  border.color: Colors.border
   color: Colors.surface
 
   Process {

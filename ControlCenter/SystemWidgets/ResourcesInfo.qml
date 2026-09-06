@@ -17,6 +17,7 @@ Rectangle{
   implicitWidth: Functions.spanToWidth(spanW)
   radius: Metrics.roundingRadius
   color: Colors.surface
+  border.color: Colors.border
 
   Process{
     id: procRAM
