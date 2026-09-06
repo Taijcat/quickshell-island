@@ -67,15 +67,19 @@ Item {
         spacing: Metrics.spacingInMenu
         GridLayout {
           id: grid
-          columns: 2
+          columns: 9
           rowSpacing: Metrics.spacingInMenu
           columnSpacing: Metrics.spacingInMenu
-          CalendarSchedule {}
-          DebugButton{}
-          DebugButton{}
-          DebugButton{}
-          DebugButton{}
-          DebugButton{}
+          Todo {
+            Layout.column: 0; Layout.row: 0
+            Layout.columnSpan: 2; Layout.rowSpan: 4
+            spanW: 2; spanH: 4
+          }
+          Appointments {
+            Layout.column: 2; Layout.row: 0
+            Layout.columnSpan: 3; Layout.rowSpan: 4
+            spanW: 3; spanH: 4
+          }
         }
       }
     }

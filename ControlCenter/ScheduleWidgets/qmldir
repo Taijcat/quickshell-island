@@ -1,3 +1,4 @@
 # ControlCenter/ScheduleWidgets/qmldir
 module SystemWidgets
-CalendarSchedule 1.0 CalendarSchedule.qml
+Todo 1.0 Todo.qml
+Appointments 1.0 Appointments.qml
