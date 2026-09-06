@@ -16,8 +16,15 @@ ln -s quickshell-island/ ~/.config/quickshell
 ```
 
 ## Configuration
-The code itself is self documenting ™, but comments are available. Configuration can be done in the ```Config``` directory. The shell assumes kitty as terminal. Editing the ```qmldir``` in ```Config/``` handles changing of themes (dynamic theme switching will be implemented at a later date)
+The code itself is self documenting ™, but comments are available. Configuration can be done in the ```Config``` directory. The shell assumes kitty as terminal. Editing the ```qmldir``` in ```Config/``` handles changing of themes (dynamic theme switching will be implemented at a later date). Expects systemd for power options and idle inhibition, but this can be changed easily.
 
 ## Things to add
 - Dynamic theme switching (backend)
 - Dynamic theme switching (frontend)
+
+## Dependencies
+- [Quickshell](https://github.com/tripathiji1312/quickshell) (duh)
+- [Hyprland](https://github.com/hyprwm/hyprland) (duh)
+- [Power Profiles Daemon](https://gitlab.freedesktop.org/upower/power-profiles-daemon)
+- [Cava](https://github.com/karlstav/cava)
+- [Calcurse](https://github.com/lfos/calcurse)
