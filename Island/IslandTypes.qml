@@ -9,6 +9,7 @@ QtObject {
     Workspaces,
     VolumeOSD,
     System,
-    Schedule
+    Schedule,
+    Productivity
   }
 }

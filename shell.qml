@@ -104,6 +104,7 @@ ShellRoot {
           VolumeOSD {}
           ControlCenterSystem {parentWindow: root}
           ControlCenterSchedule {parentWindow: root}
+          ControlCenterProductivity {parentWindow: root}
         }
       }
     }
