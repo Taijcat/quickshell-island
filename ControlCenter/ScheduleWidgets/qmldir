@@ -2,3 +2,6 @@
 module SystemWidgets
 Todo 1.0 Todo.qml
 Appointments 1.0 Appointments.qml
+CalendarSchedule 1.0 CalendarSchedule.qml
+Weather 1.0 Weather.qml
+WeatherStats 1.0 WeatherStats.qml

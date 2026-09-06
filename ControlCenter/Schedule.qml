@@ -61,24 +61,39 @@ Item {
       radius: implicitWidth / 2
     }
     ColumnLayout{
+      id: content
       spacing: Metrics.spacingInMenu
       RowLayout{
-        id: content
         spacing: Metrics.spacingInMenu
         GridLayout {
           id: grid
-          columns: 9
+          columns: 8
           rowSpacing: Metrics.spacingInMenu
           columnSpacing: Metrics.spacingInMenu
-          Todo {
+          Weather {
             Layout.column: 0; Layout.row: 0
-            Layout.columnSpan: 2; Layout.rowSpan: 4
-            spanW: 2; spanH: 4
+            Layout.columnSpan: 5; Layout.rowSpan: 1
+            spanW: 5; spanH: 1
           }
-          Appointments {
-            Layout.column: 2; Layout.row: 0
+          WeatherStats {
+            Layout.column: 5; Layout.row: 0
+            Layout.columnSpan: 3; Layout.rowSpan: 1
+            spanW: 3; spanH: 1
+          }
+          CalendarSchedule{
+            Layout.column: 0; Layout.row: 2
             Layout.columnSpan: 3; Layout.rowSpan: 4
             spanW: 3; spanH: 4
+          }
+          Appointments {
+            Layout.column: 3; Layout.row: 2
+            Layout.columnSpan: 3; Layout.rowSpan: 4
+            spanW: 3; spanH: 4
+          }
+          Todo {
+            Layout.column: 6; Layout.row: 2
+            Layout.columnSpan: 2; Layout.rowSpan: 4
+            spanW: 2; spanH: 4
           }
         }
       }

@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import "../../Config"
 
 Rectangle{
-  color: "#282828"
+  color: Colors.surface
   required property int spanW
   required property int spanH
   implicitHeight: Functions.spanToHeight(spanH)
