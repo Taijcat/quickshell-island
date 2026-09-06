@@ -50,5 +50,6 @@ QtObject {
   readonly property int waveSpeed: 1200
 
   readonly property var fetchLines: [2,3,4,5,15,16,17,18,20]
+  readonly property var gpuProcCommand: ["sh", "-c", "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu " + "--format=csv,noheader,nounits"]
 
 }

@@ -20,9 +20,7 @@ Rectangle{
 
   Process {
     id: gpuProc
-    command: ["sh", "-c",
-    "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu " +
-    "--format=csv,noheader,nounits"]
+    command: Metrics.gpuProcCommand
     stdout: StdioCollector {
       onStreamFinished: {
         const parts = text.trim().split(",")

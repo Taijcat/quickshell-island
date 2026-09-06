@@ -9,6 +9,7 @@ import "HomeWidgets"
 import "../Island"
 import "Visualizer"
 import "Examples"
+import "Calendar"
 
 
 Item {
@@ -87,7 +88,7 @@ Item {
             Layout.columnSpan: 1; Layout.rowSpan: 2
             spanW: 1; spanH: 2
           }
-          Calendar{
+          CalendarHome{
             Layout.column: 0; Layout.row: 1
             Layout.columnSpan: 3; Layout.rowSpan: 4
             spanW: 3; spanH: 4
