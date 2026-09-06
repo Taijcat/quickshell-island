@@ -129,7 +129,7 @@ Rectangle{
       Layout.alignment: Qt.AlignHCenter
       horizontalAlignment: Text.AlignHCenter
       font {
-        family: "Google Sans Flex"
+        family: Metrics.textFont
         pixelSize: Metrics.iconSize
         weight: Metrics.fontBold
         features: { "tnum": 1 }
@@ -142,7 +142,7 @@ Rectangle{
       Layout.alignment: Qt.AlignHCenter
       horizontalAlignment: Text.AlignHCenter
       font {
-        family: "Google Sans Flex"
+        family: Metrics.textFont
         pixelSize: Metrics.iconSize
         weight: Metrics.fontBold
         features: { "tnum": 1 }
@@ -156,7 +156,7 @@ Rectangle{
       horizontalAlignment: Text.AlignHCenter
       Layout.topMargin: 8
       font {
-        family: "Google Sans Flex"
+        family: Metrics.textFont
         pixelSize: Metrics.textSize
       }
     }
