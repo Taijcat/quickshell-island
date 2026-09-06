@@ -1,0 +1,11 @@
+# ControlCenter/ProductivityWidgets/qmldir
+module ProductivityWidgets
+Animation 1.0 Animation.qml
+Pomodoro 1.0 Pomodoro.qml
+ProgressBar 1.0 ProgressBar.qml
+QuickCapture 1.0 QuickCapture.qml
+ReadingList 1.0 ReadingList.qml
+Notes 1.0 Notes.qml
+Journal 1.0 Journal.qml
+DoNotDisturb 1.0 DoNotDisturb.qml
+NightLight 1.0 NightLight.qml

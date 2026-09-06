@@ -6,7 +6,6 @@ import QtQuick.Layouts
 import QtQuick.Shapes
 import "../Config/"
 import "../Island"
-import "Examples"
 import "ScheduleWidgets"
 
 Item {

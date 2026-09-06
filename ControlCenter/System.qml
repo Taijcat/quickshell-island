@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Layouts
 import "../Config/"
 import "../Island"
-import "Examples"
 import "SystemWidgets"
 
 

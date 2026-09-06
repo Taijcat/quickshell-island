@@ -51,5 +51,8 @@ QtObject {
 
   readonly property var fetchLines: [2,3,4,5,15,16,17,18,20]
   readonly property var gpuProcCommand: ["sh", "-c", "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu " + "--format=csv,noheader,nounits"]
+  readonly property string journalPath: "~/Notes/Journal/"
+  readonly property string notesPath: "~/Notes/"
+  readonly property string editor: "nvim"
 
 }

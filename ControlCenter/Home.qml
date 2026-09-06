@@ -7,8 +7,6 @@ import QtQuick.Shapes
 import "../Config/"
 import "HomeWidgets"
 import "../Island"
-import "Visualizer"
-import "Examples"
 
 
 Item {

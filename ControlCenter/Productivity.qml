@@ -6,8 +6,8 @@ import QtQuick.Layouts
 import QtQuick.Shapes
 import "../Config/"
 import "../Island"
-import "Examples"
-import "ScheduleWidgets"
+import "ProductivityWidgets"
+
 
 Item {
   id: root
@@ -47,7 +47,6 @@ Item {
     enabled: root.visible
     onActivated: picker.tabUp()
   }
-
   // Widgets
   RowLayout{
     id: main
@@ -66,15 +65,36 @@ Item {
         spacing: Metrics.spacingInMenu
         GridLayout {
           id: grid
-          columns: 2
+          columns: 8
           rowSpacing: Metrics.spacingInMenu
           columnSpacing: Metrics.spacingInMenu
-          DebugButton {}
-          DebugButton {}
-          DebugButton {}
-          DebugButton {}
+          ReadingList {
+            Layout.column: 0; Layout.row: 0
+            Layout.columnSpan: spanW; Layout.rowSpan: spanH
+            spanW: 4; spanH: 3
+          }
+          Animation {
+            Layout.column: 4; Layout.row: 0
+            Layout.columnSpan: spanW; Layout.rowSpan: spanH
+            spanW: 2; spanH: 3
+          }
+          Pomodoro {
+            Layout.column: 6; Layout.row: 0
+            Layout.columnSpan: spanW; Layout.rowSpan: spanH
+            spanW: 2; spanH: 2
+          }
+          QuickCapture {
+            Layout.column: 0; Layout.row: 3
+            Layout.columnSpan: spanW; Layout.rowSpan: spanH
+            spanW: 6; spanH: 1
+          }
+          DoNotDisturb {Layout.column: 6; Layout.row: 2}
+          NightLight {Layout.column: 7; Layout.row: 2}
+          Notes {Layout.column: 6; Layout.row: 3}
+          Journal {Layout.column: 7; Layout.row: 3}
         }
       }
+      ProgressBar{}
     }
   }
 }

@@ -3,3 +3,4 @@ module Examples
 DebugButton 1.0 DebugButton.qml
 DebugPopUp 1.0 DebugPopUp.qml
 DebugToggle 1.0 DebugToggle.qml
+DebugRectangle.qml

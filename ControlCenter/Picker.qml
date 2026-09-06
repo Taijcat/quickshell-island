@@ -21,7 +21,7 @@ ColumnLayout {
 
   property var buttons: [
     { icon: 0xf02dc, onClicked: () => IslandState.show(IslandTypes.Module.Home),   isActive: IslandState.activeModule === IslandTypes.Module.Home   },
-    { icon: 0xf14e7, onClicked: () => IslandState.show(IslandTypes.Module.Productivity), isActive: IslandState.activeModule === IslandTypes.Module.Productivity },
+    { icon: 0xf056e, onClicked: () => IslandState.show(IslandTypes.Module.Productivity), isActive: IslandState.activeModule === IslandTypes.Module.Productivity },
     { icon: 0xf00ed, onClicked: () => IslandState.show(IslandTypes.Module.Schedule), isActive: IslandState.activeModule === IslandTypes.Module.Schedule },
     { icon: 0xf0493, onClicked: () => IslandState.show(IslandTypes.Module.System), isActive: IslandState.activeModule === IslandTypes.Module.System },
   ]
