@@ -55,4 +55,9 @@ QtObject {
   readonly property string notesPath: "~/Notes/"
   readonly property string editor: "nvim"
   readonly property int journalWordGoal: 250
+
+  readonly property int pomodoroWorkSeconds: 25 * 60
+  readonly property int pomodoroRestSeconds:  5 * 60
+  readonly property string audioPlayer: "paplay"
+  readonly property string timerCompletionSoundPath: "/usr/share/sounds/freedesktop/stereo/complete.oga"
 }

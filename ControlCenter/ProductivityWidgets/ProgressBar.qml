@@ -51,6 +51,11 @@ RowLayout{
       family: Metrics.iconFont
       pixelSize: Metrics.textSize * Metrics.textSizeMult
     }
+
+    MouseArea {
+      anchors.fill: parent
+      onClicked: getJournalLinecount.running = true
+    }
   }
 
     Item {}
