@@ -17,12 +17,12 @@ QtObject {
 
   // Accent colors
   readonly property color red:    "#fb4934"
-  readonly property color green:  "#b8bb26"
+  readonly property color orange: "#fe8019"
   readonly property color yellow: "#fabd2f"
+  readonly property color green:  "#b8bb26"
+  readonly property color aqua:   "#8ec07c"
   readonly property color blue:   "#83a598"
   readonly property color purple: "#d3869b"
-  readonly property color aqua:   "#8ec07c"
-  readonly property color orange: "#fe8019"
   readonly property color gray:   "#928374"
 
   // Semantic accent
