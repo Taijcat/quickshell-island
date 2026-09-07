@@ -40,6 +40,8 @@ RowLayout{
     }
   }
 
+  Item {}
+
   Rectangle {
     Layout.fillWidth: true
     implicitHeight: Metrics.textSize / 3

@@ -51,12 +51,9 @@ RowLayout{
       family: Metrics.iconFont
       pixelSize: Metrics.textSize * Metrics.textSizeMult
     }
-
-    MouseArea{
-      anchors.fill: parent
-      onClicked: getJournalLinecount.running = true, console.log(level)
-    }
   }
+
+    Item {}
 
   Rectangle {
     Layout.fillWidth: true
@@ -83,7 +80,7 @@ RowLayout{
   Item {}
 
   Text {
-    text: journalName()
+    text: "(" + wordCount + "/" + Metrics.journalWordGoal + ")"
     color: level === 1.0 ? Colors.aqua : Colors.yellow
     font {
       family: Metrics.textFont
