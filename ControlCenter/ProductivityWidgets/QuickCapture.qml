@@ -15,6 +15,7 @@ Rectangle{
   border.color: mouseArea.containsMouse ? Colors.accent : Colors.border
   property string textToJournal: ""
   property string echoCommand: "echo '" + textToJournal + "' >> " + Metrics.journalPath + journalName()
+  property string touchCommand: "touch " + Metrics.journalPath + journalName()
 
   property date today: new Date()
   function journalName() {
@@ -38,6 +39,7 @@ Rectangle{
 
 
   function pushToJournal(text) {
+    procTouchJournal.running = true
     textToJournal = "\n" + Qt.formatDateTime(clock.date, "hh:mm") + ":\n" + text
     procPushToJournal.running = true
   }
@@ -47,6 +49,14 @@ Rectangle{
     command: ["sh", "-c", echoCommand]
     onExited: procCopy.running = true
   }
+
+  Process {
+    id: procTouchJournal
+    command: ["sh", "-c", touchCommand]
+    onExited: procCopy.running = true
+  }
+
+
 
   Process {
     id: procCopy
