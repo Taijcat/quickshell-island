@@ -45,6 +45,12 @@ Rectangle{
   Process {
     id: procPushToJournal
     command: ["sh", "-c", echoCommand]
+    onExited: procCopy.running = true
+  }
+
+  Process {
+    id: procCopy
+    command: ["wl-copy", textToJournal]
   }
 
   TextField{
