@@ -52,6 +52,7 @@ Rectangle{
       }
     }
     req.open("GET", "https://wttr.in/?format=j1")
+    req.setRequestHeader("Connection", "close")
     req.send()
   }
 

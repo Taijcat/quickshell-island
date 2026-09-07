@@ -1,0 +1,18 @@
+{
+  "books": [
+    {
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "totalPages": 288,
+      "currentPage": 45,
+      "status": "reading"
+    },
+    {
+      "title": "The Handmaid's tale",
+      "author": "Margaret Atwood",
+      "totalPages": 479,
+      "currentPage": 75,
+      "status": "reading"
+    }
+  ]
+}

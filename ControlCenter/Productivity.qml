@@ -69,15 +69,18 @@ Item {
           rowSpacing: Metrics.spacingInMenu
           columnSpacing: Metrics.spacingInMenu
           ReadingList {
+            id: readingList
             Layout.column: 0; Layout.row: 0
             Layout.columnSpan: spanW; Layout.rowSpan: spanH
-            spanW: 4; spanH: 3
+            spanW: 6; spanH: 3
           }
+          /*
           Animation {
             Layout.column: 4; Layout.row: 0
             Layout.columnSpan: spanW; Layout.rowSpan: spanH
             spanW: 2; spanH: 3
           }
+          */
           Pomodoro {
             Layout.column: 6; Layout.row: 0
             Layout.columnSpan: spanW; Layout.rowSpan: spanH
@@ -97,4 +100,7 @@ Item {
       ProgressBar{}
     }
   }
+  BookPopup {target: readingList; anchorWindow: root.parentWindow; chosenBook: readingList.chosenBook}
+  BookPopup {target: libraryPopup; anchorWindow: root.parentWindow; chosenBook: libraryPopup.chosenBook}
+  LibraryPopup {id: libraryPopup; target: readingList; anchorWindow: root.parentWindow;}
 }

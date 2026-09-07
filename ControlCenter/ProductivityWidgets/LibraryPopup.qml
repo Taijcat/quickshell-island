@@ -1,43 +1,37 @@
+import Quickshell
 import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import "../../Config"
+import "../../Island"
 
-Rectangle{
+PopupWindow{
   id: root
-  required property int spanW
-  required property int spanH
-  radius: Metrics.roundingRadius
-  implicitWidth: Functions.spanToWidth(spanW)
-  implicitHeight: Functions.spanToHeight(spanH)
-  color: Colors.surface
-  border.color: Colors.border
+  color: "transparent"
 
-  property int chosenBook: 0
+  // PopUp Logic
+  required property var anchorWindow
+  property bool menuOpen: false
   property var bookData: []
+  property var target: null
+  property int chosenBook: 0
+  visible: menuOpen
+  grabFocus: true
+
+  implicitWidth: content.implicitWidth * Metrics.easingHeadroom
+  implicitHeight: content.implicitHeight * Metrics.easingHeadroom
+
+  anchor.window: anchorWindow
+  anchor.rect.x: anchorWindow.width / 2 - root.width / 2
+  anchor.rect.y: anchorWindow.height / 2 - root.height / 2
+
   signal clicked()
-  signal openLibrary()
 
-
-  Behavior on color {
-    ColorAnimation {duration: Metrics.animationLength}
-  }
-
-  function openBookPopup(chosen) {
-    root.chosenBook = chosen
-    root.clicked()
-  }
-
-  FileView {
-    id: readingListFile
-    path: Qt.resolvedUrl("../../books.json")
-    watchChanges: true
-    onFileChanged: reload()
-
-
-    onLoaded: {
-      let parsedFile = JSON.parse(readingListFile.text())
-      bookData = parsedFile.books
+  Connections {
+    target: root.target
+    function onOpenLibrary() {
+      root.menuOpen = true
     }
   }
 
@@ -51,32 +45,70 @@ Rectangle{
     return currentPage + "/" + totalPages
   }
 
-  ColumnLayout{
-    anchors.fill: parent
-    anchors.margins: Metrics.edgePadding
-    spacing: Metrics.spacingInMenu
-    Text{
-      text: "Reading List"
-      color: textMouseArea.containsMouse ? Colors.accent : Colors.text
-      font{
-        family: Metrics.textFont
-        pixelSize: Metrics.textSize
-        weight: 500
-      }
-      MouseArea{
-        id: textMouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: root.openLibrary()
+  FileView {
+    id: readingListFile
+    path: Qt.resolvedUrl("../../books.json")
+    watchChanges: true
+    onFileChanged: reload()
+
+
+    onLoaded: {
+      let parsedFile = JSON.parse(readingListFile.text())
+      root.bookData = parsedFile.books
+    }
+  }
+
+  Shortcut {
+    sequence: "Escape"
+    enabled: root.visible
+    onActivated: {
+      menuOpen = false
+      IslandState.show(IslandTypes.Module.Home)
+    }
+  }
+
+  onVisibleChanged: {
+    menuOpen = visible
+  }
+
+  Rectangle{
+    id: content
+    anchors.centerIn: parent
+    color: Colors.base
+    border.color: Colors.border
+    radius: Metrics.roundingRadius
+
+    implicitHeight: listCol.implicitHeight + 2 * Metrics.edgePadding
+    implicitWidth: Metrics.popUpMenuWidth * 1.5
+
+    scale: root.menuOpen ? 1.0 : 0.4
+    Behavior on scale {
+      NumberAnimation {
+        duration: Metrics.animationLength
+        easing.type: Easing.OutBack
+        easing.overshoot: Metrics.easingHeadroom
       }
     }
-    Rectangle{
-      color: Colors.border
-      height: Metrics.spacerWidth
-      Layout.fillWidth: true
-    }
-    Repeater{
-      model: Math.min(bookData.length, 4)
+
+    ColumnLayout {
+      id: listCol
+      anchors.fill: parent
+      anchors.margins: Metrics.edgePadding
+      spacing: Metrics.spacingInMenu
+
+      Text {
+        text: "Available Books"
+        color: Colors.text
+        font {
+          family: Metrics.textFont
+          pixelSize: Metrics.textSize * Metrics.textSizeMult
+          weight: 500
+        }
+      }
+      Rectangle{height: 1; color: Colors.textDim; implicitWidth: parent.width; Layout.alignment: Qt.AlignHCenter; radius: 1; antialiasing: true}
+      Item {}
+          Repeater{
+      model: bookData.length
       delegate: Rectangle{
         id: itemRect
         color:mouseArea.containsMouse ? Colors.overlay : Colors.surface
@@ -100,10 +132,10 @@ Rectangle{
           anchors.fill: parent
           hoverEnabled: true
           onClicked: {
-            console.log(index)
             flash.start()
-            root.clicked()
+            menuOpen = false
             root.chosenBook = index
+            root.clicked()
           }
         }
 
@@ -140,6 +172,6 @@ Rectangle{
         }
       }
     }
-    Item{Layout.fillHeight: true}
+    }
   }
 }
