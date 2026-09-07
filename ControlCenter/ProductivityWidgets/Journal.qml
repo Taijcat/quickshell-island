@@ -11,7 +11,6 @@ Rectangle{
   implicitHeight: Metrics.buttonHeight
   color: mouseArea.containsMouse? Colors.overlay : Colors.surface
   border.color: mouseArea.containsMouse ? Colors.accent : Colors.border
-  property date today: new Date()
   property string launchCommand: Metrics.terminal + " " + Metrics.editor + " " + Metrics.journalPath + journalName()
 
   Process {
@@ -29,6 +28,7 @@ Rectangle{
     ColorAnimation { target: root; property: "color"; to: Colors.surface; duration: Metrics.animationLength }
   }
 
+  property date today: new Date()
   function journalName() {
     let day = (today.getDate() < 10) ? ("0" + today.getDate()) : (today.getDate())
     let month = ((today.getMonth() + 1) < 10) ? ("0" + (today.getMonth() + 1)) : (today.getMonth() + 1)

@@ -1,5 +1,5 @@
 import Quickshell
-import Quickshell.Services.UPower
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import "../../Config/"
@@ -8,35 +8,53 @@ RowLayout{
   id: root
   spacing: Metrics.spacingInMenu
 
-  property var battery: UPower.displayDevice
-  property bool pluggedIn: battery.state === UPowerDeviceState.Charging || battery.state === UPowerDeviceState.FullyCharged
-  readonly property real level: battery.energy / battery.energyCapacity
-  readonly property int percentage: Math.round(100 * level)
+  property date today: new Date()
+  function journalName() {
+    let day = (today.getDate() < 10) ? ("0" + today.getDate()) : (today.getDate())
+    let month = ((today.getMonth() + 1) < 10) ? ("0" + (today.getMonth() + 1)) : (today.getMonth() + 1)
 
-
-  property string icon: {
-    if (percentage > 94 && pluggedIn) { return String.fromCodePoint(0xf06a5) }
-    if (root.pluggedIn) { return String.fromCodePoint(0xf0084) }
-    if (percentage < 95) { return String.fromCodePoint(0xf0079 + Math.trunc(percentage / 10)) }
-
-    return String.fromCodePoint(0xf0079)
+    return today.getFullYear() + "-" + month + "-" + day + ".md"
   }
-  
-  property string color: {
-    if (pluggedIn) { return Colors.info }
-    if (percentage < 15) {return Colors.error}
-    if (percentage < 30) {return Colors.warn}
-    return Colors.success
+
+  property string wcCommand: "wc -w " + Metrics.journalPath + journalName()
+  property int wordCount: 0
+
+    Process {
+    id: getJournalLinecount
+    command: ["sh", "-c", wcCommand]
+    stdout: StdioCollector {
+      onStreamFinished: {
+        let textSplit = text.split(" ")
+        wordCount = parseInt(textSplit[0]) === NaN ? 0 : parseInt(textSplit[0])
+      }
+    }
+  }
+
+  property real level: Math.min(wordCount, Metrics.journalWordGoal) / Metrics.journalWordGoal
+
+  Timer {
+    interval: 10000
+    running: true
+    repeat: true
+    triggeredOnStart: true
+    onTriggered: {
+      getJournalLinecount.running = true
+    }
   }
 
   Text{
-    color: root.color
+    text: level === 1 ? String.fromCodePoint(0xf14f6) : String.fromCodePoint(0xf14e9)
+    color: level === 1.0 ? Colors.aqua : Colors.yellow
     Layout.alignment: Qt.AlignVCenter
 
-    text: icon
     font {
-      family: "JetBrainsMono Nerd Font Propo"
-      pixelSize: Metrics.textSize
+      family: Metrics.iconFont
+      pixelSize: Metrics.textSize * Metrics.textSizeMult
+    }
+
+    MouseArea{
+      anchors.fill: parent
+      onClicked: getJournalLinecount.running = true, console.log(level)
     }
   }
 
@@ -47,7 +65,7 @@ RowLayout{
     radius: height/2
     Rectangle{
       implicitHeight: parent.implicitHeight
-      color: root.color
+      color: level === 1.0 ? Colors.aqua : Colors.yellow
       radius: height/2
       width: parent.width * level
 
@@ -65,8 +83,8 @@ RowLayout{
   Item {}
 
   Text {
-    text: percentage + "%"
-    color: root.color
+    text: journalName()
+    color: level === 1.0 ? Colors.aqua : Colors.yellow
     font {
       family: Metrics.textFont
       pixelSize: Metrics.textSize

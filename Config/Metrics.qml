@@ -54,5 +54,5 @@ QtObject {
   readonly property string journalPath: "~/Notes/Journal/"
   readonly property string notesPath: "~/Notes/"
   readonly property string editor: "nvim"
-
+  readonly property int journalWordGoal: 250
 }
