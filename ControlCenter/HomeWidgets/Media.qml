@@ -30,6 +30,14 @@ RowLayout{
    return players[preferredIndex]
  }
 
+ Shortcut {
+   sequence: "Space"
+   enabled: root.visible
+   onActivated:{
+     root.player.togglePlaying()
+   }
+ }
+
 
   readonly property bool active: player !== null
   readonly property bool playing: active && player.playbackState === MprisPlaybackState.Playing
@@ -329,7 +337,7 @@ component MediaSlider: Item {
       }
 
       Timer {
-        interval: 1000
+        interval: 200
         running: root.playing
         repeat: true
         onTriggered: {
