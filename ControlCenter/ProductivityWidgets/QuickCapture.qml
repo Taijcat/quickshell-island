@@ -67,6 +67,8 @@ Rectangle{
     anchors.fill: parent
     anchors.margins: Metrics.edgePadding
     placeholderText: qsTr("Type away...")
+    color: Colors.text
+    palette.placeholderText: Colors.textDim
     wrapMode: TextEdit.Wrap
     onAccepted: {
       pushToJournal(text)
