@@ -91,9 +91,8 @@ Item {
             spanW: 3; spanH: 4
           }
         }
-        Media {id: media; lengthPre: content.height; preferredIndex: playerMenu.preferredIndex} // Base length = 112
-        Visualizer {length: content.height}
-        //Text{text: media.height; color:"#FFFFFF"}
+        Media {id: media; lengthPre: grid.height; preferredIndex: playerMenu.preferredIndex}
+        Visualizer {length: grid.height}
       }
       VolumeSlider {id: volumeSlider; length: main.width;}
     }

@@ -50,7 +50,7 @@ RowLayout {
         text: "󰝥"
         color: isActive ? Colors.hint : (wsButton.ws ? Colors.accent : Colors.text)
         font {
-          family: Metrics.iconFont
+          family: Metrics.textFont
           letterSpacing: -1
           pixelSize: Metrics.textSize
           weight: isActive ? 600 : 400
