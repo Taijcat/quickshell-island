@@ -320,7 +320,7 @@ component MediaSlider: Item {
 
         property bool wasPlayingBeforeSeek: false
 
-        length: root.active ? root.player.length : 1
+        length: root.player.length
         position: root.active && !seeking ? root.player.position : position
 
         onSeekStarted: {
