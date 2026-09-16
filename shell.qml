@@ -100,8 +100,8 @@ ShellRoot {
           spacing: 0
           Clock {}
           Workspaces {}
-          ControlCenterHome { parentWindow: root }
           VolumeOSD {}
+          ControlCenterHome { parentWindow: root }
           ControlCenterSystem {parentWindow: root}
           ControlCenterSchedule {parentWindow: root}
           ControlCenterProductivity {parentWindow: root}

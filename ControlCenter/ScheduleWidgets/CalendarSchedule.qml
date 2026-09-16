@@ -69,7 +69,10 @@ Rectangle {
     id:mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    onClicked: { calcurseLaunch.running = true }
+    onClicked: {
+      calcurseLaunch.running = true
+      flash.start()
+    }
   }
 
   Behavior on color {
