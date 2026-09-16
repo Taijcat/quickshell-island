@@ -51,7 +51,7 @@ Rectangle{
         reqListener(req)
       }
     }
-    req.open("GET", "https://wttr.in/?format=j1")
+    req.open("GET", "http://wttr.in/?format=j1")
     req.setRequestHeader("Connection", "close")
     req.send()
   }

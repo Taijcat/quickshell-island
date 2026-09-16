@@ -26,7 +26,7 @@ Rectangle{
       onStreamFinished: {
         const val = parseFloat(text)
         if (!isNaN(val)) {
-          usageVal = parseFloat(val.toFixed(5) / 100)
+          usageVal = parseFloat(val.toFixed(5))
           let newArr = usageArr.slice(1)
           newArr.push(usageVal)
           usageArr = newArr
@@ -74,7 +74,7 @@ Rectangle{
         model: barCount
         delegate: Rectangle{
           Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-          Layout.preferredHeight: ((root.implicitHeight - 2 * Metrics.edgePadding) * usageArr[index])
+          Layout.preferredHeight: Math.max(((root.implicitHeight - 2 * Metrics.edgePadding) * usageArr[index] / 100), 1.0)
           Layout.preferredWidth: Metrics.usageBarWidthSystem
           radius: Layout.preferredWidth / 2
           color: Colors.blue
@@ -107,7 +107,7 @@ Rectangle{
             }
           }
           Text{
-            text: " CPU: " + usageVal.toFixed(2) + " %"
+            text: " CPU: " + usageVal.toFixed(1) + " %"
             color: Colors.blue
             font{
               family: Metrics.numberFont
