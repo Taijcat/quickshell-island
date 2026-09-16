@@ -15,7 +15,7 @@ Rectangle{
   border.color: mouseArea.containsMouse ? Colors.accent : Colors.border
   property string textToJournal: ""
   property string echoCommand: "echo '" + textToJournal + "' >> " + Metrics.journalPath + journalName()
-  property string touchCommand: "touch " + Metrics.journalPath + journalName()
+  property string touchCommand: "touch '" + Metrics.journalPath + journalName() + "'"
 
   property date today: new Date()
   function journalName() {
@@ -55,8 +55,6 @@ Rectangle{
     command: ["sh", "-c", touchCommand]
     onExited: procCopy.running = true
   }
-
-
 
   Process {
     id: procCopy
