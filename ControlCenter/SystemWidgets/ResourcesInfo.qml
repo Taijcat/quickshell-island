@@ -21,7 +21,7 @@ Rectangle{
 
   Process{
     id: procRAM
-    command: ["sh", "-c", "top -bn1 | grep 'MiB Mem' | awk '{print $6 \" \" $4}'"]
+    command: ["sh", "-c", "top -bn1 | grep 'MiB Mem' | awk '{print $8 \" \" $4}'"]
     stdout: StdioCollector {
       onStreamFinished: {
         let vals = this.text.trim().split(" ")
