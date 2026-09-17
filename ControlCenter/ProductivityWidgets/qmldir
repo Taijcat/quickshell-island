@@ -11,3 +11,4 @@ DoNotDisturb 1.0 DoNotDisturb.qml
 NightLight 1.0 NightLight.qml
 LibraryPopup 1.0 LibraryPopup.qml
 BookPopup 1.0 BookPopup.qml
+AddBookPopup 1.0 AddBookPopup.qml

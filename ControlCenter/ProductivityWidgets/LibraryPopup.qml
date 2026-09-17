@@ -27,6 +27,7 @@ PopupWindow{
   anchor.rect.y: anchorWindow.height / 2 - root.height / 2
 
   signal clicked()
+  signal add()
 
   Connections {
     target: root.target
@@ -96,13 +97,45 @@ PopupWindow{
       anchors.margins: Metrics.edgePadding
       spacing: Metrics.spacingInMenu
 
-      Text {
-        text: "Available Books"
-        color: Colors.text
-        font {
-          family: Metrics.textFont
-          pixelSize: Metrics.textSize * Metrics.textSizeMult
-          weight: 500
+      RowLayout{
+        Text {
+          text: "Available Books"
+          color: Colors.text
+          font {
+            family: Metrics.textFont
+            pixelSize: Metrics.textSize * Metrics.textSizeMult
+            weight: 500
+          }
+        } 
+        Item{Layout.fillWidth: true}
+        Rectangle{
+          Layout.preferredWidth: Math.max( plusSign.width, plusSign.height )
+          Layout.preferredHeight: Math.max( plusSign.width, plusSign.height )
+          radius: Metrics.roundingRadius
+          border.color: addMouseArea.containsMouse ? Colors.accent : Colors.border
+          color: addMouseArea.containsMouse ? Colors.overlay : Colors.surface
+          Behavior on color {
+            ColorAnimation{duration: Metrics.animationLength}
+          }
+          MouseArea{
+            id: addMouseArea
+            hoverEnabled: true
+            anchors.fill: parent
+            onClicked: {
+              menuOpen = false
+              root.add()
+            }
+          }
+          Text{
+            anchors.centerIn: parent
+            id: plusSign
+            text: "+"
+            color: Colors.text
+            font{
+              family: Metrics.textFont
+              pixelSize: Metrics.iconSize
+            }
+          }
         }
       }
       Rectangle{height: 1; color: Colors.textDim; implicitWidth: parent.width; Layout.alignment: Qt.AlignHCenter; radius: 1; antialiasing: true}
