@@ -13,6 +13,13 @@
       "totalPages": 479,
       "currentPage": 75,
       "status": "reading"
+    },
+    {
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "totalPages": "225",
+      "currentPage": "155",
+      "status": "test_sts"
     }
   ]
 }

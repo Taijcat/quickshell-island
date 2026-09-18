@@ -102,5 +102,6 @@ Item {
   }
   AddBookPopup {target: libraryPopup; anchorWindow: root.parentWindow;}
   BookPopup {target: libraryPopup; anchorWindow: root.parentWindow; chosenBook: libraryPopup.chosenBook}
+  BookPopup {target: readingList; anchorWindow: root.parentWindow; chosenBook: libraryPopup.chosenBook}
   LibraryPopup {id: libraryPopup; target: readingList; anchorWindow: root.parentWindow;}
 }

@@ -76,7 +76,7 @@ Rectangle{
       Layout.fillWidth: true
     }
     Repeater{
-      model: Math.min(bookData.length, 4)
+      model: Math.min(bookData.length, 3)
       delegate: Rectangle{
         id: itemRect
         color:mouseArea.containsMouse ? Colors.overlay : Colors.surface

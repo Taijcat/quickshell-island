@@ -122,6 +122,8 @@ PopupWindow{
             anchors.fill: parent
             onClicked: {
               root.addBook()
+              menuOpen = false
+              IslandState.show(IslandTypes.Module.Home)
             }
           }
           Text{

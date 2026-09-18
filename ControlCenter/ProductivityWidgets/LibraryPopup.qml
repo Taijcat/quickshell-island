@@ -46,6 +46,15 @@ PopupWindow{
     return currentPage + "/" + totalPages
   }
 
+  function removeBook(index) {
+    let data = JSON.parse(readingListFile.text())
+
+    data.books.splice(index, 1)
+
+    readingListFile.setText(JSON.stringify(data, null, 2))
+    root.bookData = data.books
+  }
+
   FileView {
     id: readingListFile
     path: Qt.resolvedUrl("../../books.json")
@@ -163,12 +172,16 @@ PopupWindow{
         MouseArea{
           id:mouseArea
           anchors.fill: parent
+          acceptedButtons: Qt.LeftButton | Qt.RightButton
           hoverEnabled: true
-          onClicked: {
-            flash.start()
-            menuOpen = false
-            root.chosenBook = index
-            root.clicked()
+          onClicked: (mouse) => {
+            if (mouse.button == Qt.LeftButton) {
+              flash.start()
+              menuOpen = false
+              root.chosenBook = index
+              root.clicked() 
+            }
+            if (mouse.button == Qt.RightButton) {removeBook(index)}
           }
         }
 
