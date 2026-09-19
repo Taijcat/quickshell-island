@@ -90,7 +90,7 @@ Rectangle{
         wrapMode: Text.Wrap
         font {
           family: Metrics.textFont
-          pixelSize: Metrics.textSize / Metrics.textSizeMult
+          pixelSize: Metrics.textSize / (Metrics.textSizeMult * Metrics.textSizeMult)
         }
       }
     }
